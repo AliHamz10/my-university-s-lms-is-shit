@@ -1,0 +1,40 @@
+name: Bug report
+description: Report a bug to help us improve
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+      placeholder: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Step-by-step instructions to reproduce the behavior.
+      placeholder: 1) Go to ...\n2) Click ...\n3) See error
+    validations:
+      required: true
+  - type: input
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs/Stacktrace
+      render: shell
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      placeholder: OS, Node version, Browser
+  - type: input
+    id: screenshots
+    attributes:
+      label: Screenshots (optional)
