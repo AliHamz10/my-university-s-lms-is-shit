@@ -1,0 +1,47 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Build outputs
+/dist
+/build
+/.cache
+/.parcel-cache
+/.turbo
+/.next
+/.vite
+coverage/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Logs
+logs
+*.log
+
+# Misc
+*.tsbuildinfo
+*.local
+
+# Client specific
+client/dist
+client/.vite
+
+# Server specific
+server/logs
+server/dist
