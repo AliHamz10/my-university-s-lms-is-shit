@@ -1,0 +1,14 @@
+{
+  "root": true,
+  "env": { "es2022": true, "node": true, "browser": true },
+  "ignorePatterns": ["dist/", "build/", "node_modules/", "coverage/", "client/dist", "server/dist"],
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": { "sourceType": "module" },
+      "plugins": ["@typescript-eslint"],
+      "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:react-hooks/recommended"]
+    }
+  ]
+}

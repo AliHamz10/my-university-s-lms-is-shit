@@ -1,0 +1,13 @@
+{
+  "name": "my-university-s-lms-is-shit",
+  "private": true,
+  "workspaces": ["client", "server"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "npm run dev -w server & npm run dev -w client",
+    "build": "npm run build -ws",
+    "start": "npm run start -w server",
+    "lint": "npm run lint -ws",
+    "format": "prettier --write ."
+  }
+}
