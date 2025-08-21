@@ -22,7 +22,7 @@
     "lodash": "^4.17.21",
     "clsx": "^2.0.0",
     "tailwind-merge": "^2.0.0",
-    "lucide-react": "^0.294.0",
+    "lucide-react": "^0.540.0",
     "framer-motion": "^10.16.16"
   },
   "devDependencies": {
