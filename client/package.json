@@ -4,7 +4,7 @@
   "description": "Frontend client for University LMS",
   "private": true,
   "dependencies": {
-    "react": "^18.2.0",
+    "react": "^19.1.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.1",
     "react-scripts": "5.0.1",
