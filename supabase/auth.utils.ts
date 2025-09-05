@@ -3,7 +3,7 @@
 // Uses Supabase client and database functions
 
 import { createClient } from '@supabase/supabase-js';
-import type { HasRoleParams, IsAdminParams, CanAccessProfileParams } from './db.types';
+import type { Role, Profile } from './db.types';
 
 // Initialize Supabase client
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -161,7 +161,7 @@ export async function revokeRole(
  * @param orgId - Organization ID (null for global roles)
  * @returns Promise<Role[]>
  */
-export async function getUserRoles(profileId: string, orgId: string | null = null) {
+export async function getUserRoles(profileId: string, orgId: string | null = null): Promise<Role[]> {
   const { data, error } = await supabase
     .from('profile_roles')
     .select(`
@@ -185,7 +185,7 @@ export async function getUserRoles(profileId: string, orgId: string | null = nul
  * @param orgId - Organization ID (null for global roles)
  * @returns Promise<Profile[]>
  */
-export async function getUsersWithRole(roleKey: string, orgId: string | null = null) {
+export async function getUsersWithRole(roleKey: string, orgId: string | null = null): Promise<Profile[]> {
   const { data, error } = await supabase
     .from('profile_roles')
     .select(`

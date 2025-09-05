@@ -22,19 +22,26 @@ CREATE TABLE public.profiles (
     id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
     org_id UUID NULL, -- Multi-org support
     email TEXT NOT NULL UNIQUE,
-    first_name TEXT NOT NULL,
-    last_name TEXT NOT NULL,
-    username TEXT UNIQUE NULL,
-    avatar_url TEXT NULL,
+    first_name TEXT NOT NULL CHECK (LENGTH(first_name) >= 1 AND LENGTH(first_name) <= 100),
+    last_name TEXT NOT NULL CHECK (LENGTH(last_name) >= 1 AND LENGTH(last_name) <= 100),
+    username TEXT UNIQUE NULL CHECK (username IS NULL OR (LENGTH(username) >= 3 AND LENGTH(username) <= 50 AND username ~ '^[a-zA-Z0-9_-]+$')),
+    avatar_url TEXT NULL CHECK (avatar_url IS NULL OR avatar_url ~ '^https?://'),
     status user_status NOT NULL DEFAULT 'active',
     locale user_locale NOT NULL DEFAULT 'en',
     email_verified_at TIMESTAMPTZ NULL,
-    failed_login_attempts INTEGER NOT NULL DEFAULT 0,
+    failed_login_attempts INTEGER NOT NULL DEFAULT 0 CHECK (failed_login_attempts >= 0 AND failed_login_attempts <= 10),
     locked_until TIMESTAMPTZ NULL,
     last_login_at TIMESTAMPTZ NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    deleted_at TIMESTAMPTZ NULL
+    deleted_at TIMESTAMPTZ NULL,
+    
+    -- Ensure locked_until is in the future when set
+    CHECK (locked_until IS NULL OR locked_until > NOW()),
+    -- Ensure email_verified_at is not in the future
+    CHECK (email_verified_at IS NULL OR email_verified_at <= NOW()),
+    -- Ensure last_login_at is not in the future
+    CHECK (last_login_at IS NULL OR last_login_at <= NOW())
 );
 
 -- Create profile_roles junction table
@@ -128,6 +135,11 @@ CREATE TRIGGER set_timestamp_roles
 
 CREATE TRIGGER set_timestamp_profiles
     BEFORE UPDATE ON public.profiles
+    FOR EACH ROW
+    EXECUTE FUNCTION public.trigger_set_timestamp();
+
+CREATE TRIGGER set_timestamp_profile_roles
+    BEFORE UPDATE ON public.profile_roles
     FOR EACH ROW
     EXECUTE FUNCTION public.trigger_set_timestamp();
 

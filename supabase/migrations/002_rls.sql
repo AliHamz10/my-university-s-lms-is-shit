@@ -24,6 +24,7 @@ CREATE POLICY "Admins can manage roles" ON public.roles
             JOIN public.roles r ON pr.role_id = r.id
             WHERE pr.profile_id = auth.uid()
             AND r.key = 'ADMIN'
+            AND pr.org_id IS NULL  -- Only global admins can manage roles
             AND pr.deleted_at IS NULL
         )
     );
@@ -31,9 +32,20 @@ CREATE POLICY "Admins can manage roles" ON public.roles
 -- RLS Policies for profiles table
 -- Users can read and update their own profile
 CREATE POLICY "Users can manage own profile" ON public.profiles
-    FOR ALL
+    FOR SELECT
     TO authenticated
     USING (id = auth.uid() AND deleted_at IS NULL);
+
+CREATE POLICY "Users can update own profile" ON public.profiles
+    FOR UPDATE
+    TO authenticated
+    USING (id = auth.uid() AND deleted_at IS NULL);
+
+-- Users can insert their own profile (handled by trigger, but need policy)
+CREATE POLICY "Users can insert own profile" ON public.profiles
+    FOR INSERT
+    TO authenticated
+    WITH CHECK (id = auth.uid());
 
 -- Admins can read all profiles in their org or globally
 CREATE POLICY "Admins can read profiles in org" ON public.profiles
@@ -51,13 +63,13 @@ CREATE POLICY "Admins can read profiles in org" ON public.profiles
                 AND pr.deleted_at IS NULL
             )
             OR
-            -- Org admin can see profiles in same org
+            -- Org admin can see profiles in same org (including null org_id profiles)
             EXISTS (
                 SELECT 1 FROM public.profile_roles pr
                 JOIN public.roles r ON pr.role_id = r.id
                 WHERE pr.profile_id = auth.uid()
                 AND r.key = 'ADMIN'
-                AND pr.org_id = profiles.org_id
+                AND (pr.org_id = profiles.org_id OR (pr.org_id IS NULL AND profiles.org_id IS NULL))
                 AND pr.deleted_at IS NULL
             )
         )
@@ -79,13 +91,13 @@ CREATE POLICY "Admins can update profiles in org" ON public.profiles
                 AND pr.deleted_at IS NULL
             )
             OR
-            -- Org admin can update profiles in same org
+            -- Org admin can update profiles in same org (including null org_id profiles)
             EXISTS (
                 SELECT 1 FROM public.profile_roles pr
                 JOIN public.roles r ON pr.role_id = r.id
                 WHERE pr.profile_id = auth.uid()
                 AND r.key = 'ADMIN'
-                AND pr.org_id = profiles.org_id
+                AND (pr.org_id = profiles.org_id OR (pr.org_id IS NULL AND profiles.org_id IS NULL))
                 AND pr.deleted_at IS NULL
             )
         )
@@ -114,13 +126,13 @@ CREATE POLICY "Admins can manage roles in org" ON public.profile_roles
                 AND pr.deleted_at IS NULL
             )
             OR
-            -- Org admin can manage role assignments in same org
+            -- Org admin can manage role assignments in same org (including null org_id)
             EXISTS (
                 SELECT 1 FROM public.profile_roles pr
                 JOIN public.roles r ON pr.role_id = r.id
                 WHERE pr.profile_id = auth.uid()
                 AND r.key = 'ADMIN'
-                AND pr.org_id = profile_roles.org_id
+                AND (pr.org_id = profile_roles.org_id OR (pr.org_id IS NULL AND profile_roles.org_id IS NULL))
                 AND pr.deleted_at IS NULL
             )
         )

@@ -186,3 +186,23 @@ SELECT schemaname, tablename, policyname, permissive, roles, cmd, qual
 FROM pg_policies
 WHERE schemaname = 'public';
 ```
+
+## Comprehensive Testing
+
+Run the included test script to verify all components:
+
+```sql
+-- Run comprehensive test
+\i test-migrations.sql
+```
+
+This will test:
+- ✅ Tables created successfully
+- ✅ Roles seeded properly
+- ✅ Test users created
+- ✅ RLS enabled on all tables
+- ✅ Helper functions working
+- ✅ Triggers created
+- ✅ Constraints working
+- ✅ Indexes created
+- ✅ Function logic correct

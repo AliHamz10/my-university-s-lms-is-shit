@@ -16,6 +16,7 @@ ON CONFLICT (key) DO UPDATE SET
 
 -- Create test admin user (replace with actual UUID if needed)
 -- This creates a profile that can be used for testing
+-- Note: In production, this would be created via Supabase Auth signup
 INSERT INTO public.profiles (
     id,
     email,
@@ -23,14 +24,18 @@ INSERT INTO public.profiles (
     last_name,
     username,
     status,
-    email_verified_at
+    email_verified_at,
+    failed_login_attempts,
+    last_login_at
 ) VALUES (
     '00000000-0000-0000-0000-000000000001'::UUID, -- Test admin UUID
     'admin@university.edu',
-    'Test',
+    'System',
     'Administrator',
     'admin',
     'active',
+    NOW(),
+    0,
     NOW()
 ) ON CONFLICT (id) DO UPDATE SET
     email = EXCLUDED.email,
@@ -60,7 +65,9 @@ INSERT INTO public.profiles (
     username,
     org_id,
     status,
-    email_verified_at
+    email_verified_at,
+    failed_login_attempts,
+    last_login_at
 ) VALUES (
     '00000000-0000-0000-0000-000000000002'::UUID, -- Test org admin UUID
     'dept-admin@university.edu',
@@ -69,6 +76,8 @@ INSERT INTO public.profiles (
     'dept_admin',
     '00000000-0000-0000-0000-000000000010'::UUID, -- Test org ID
     'active',
+    NOW(),
+    0,
     NOW()
 ) ON CONFLICT (id) DO UPDATE SET
     email = EXCLUDED.email,
