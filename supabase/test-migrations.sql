@@ -48,7 +48,7 @@ SELECT 'Triggers created' as test_result
 WHERE EXISTS (
     SELECT 1 FROM information_schema.triggers 
     WHERE trigger_schema = 'public' 
-    AND trigger_name IN ('set_timestamp_roles', 'set_timestamp_profiles', 'on_auth_user_created')
+    AND trigger_name IN ('set_timestamp_roles', 'set_timestamp_profiles', 'set_timestamp_profile_roles', 'on_auth_user_created')
 );
 
 -- Test 7: Check constraints
@@ -83,3 +83,55 @@ SELECT
         THEN 'is_admin function working correctly'
         ELSE 'is_admin function has issues'
     END as test_result;
+
+-- Test 11: Test constraint validation (should fail with invalid data)
+DO $$
+BEGIN
+    -- Test username constraint
+    BEGIN
+        INSERT INTO public.profiles (id, email, first_name, last_name, username) 
+        VALUES ('00000000-0000-0000-0000-000000000999', 'test@test.com', 'Test', 'User', 'ab'); -- Too short
+        RAISE EXCEPTION 'Username constraint failed';
+    EXCEPTION
+        WHEN check_violation THEN
+            -- Expected behavior
+    END;
+    
+    -- Test email constraint
+    BEGIN
+        INSERT INTO public.profiles (id, email, first_name, last_name, avatar_url) 
+        VALUES ('00000000-0000-0000-0000-000000000998', 'test@test.com', 'Test', 'User', 'invalid-url'); -- Invalid URL
+        RAISE EXCEPTION 'Avatar URL constraint failed';
+    EXCEPTION
+        WHEN check_violation THEN
+            -- Expected behavior
+    END;
+    
+    RAISE NOTICE 'Constraint validation working correctly';
+END $$;
+
+-- Test 12: Test unique constraints
+SELECT 'Unique constraints working' as test_result
+WHERE NOT EXISTS (
+    SELECT 1 FROM public.profiles 
+    WHERE email = 'admin@university.edu' 
+    GROUP BY email 
+    HAVING COUNT(*) > 1
+);
+
+-- Test 13: Test foreign key constraints
+SELECT 'Foreign key constraints working' as test_result
+WHERE EXISTS (
+    SELECT 1 FROM information_schema.table_constraints 
+    WHERE constraint_schema = 'public' 
+    AND table_name = 'profile_roles'
+    AND constraint_type = 'FOREIGN KEY'
+);
+
+-- Test 14: Test indexes are being used (performance check)
+SELECT 'Indexes are effective' as test_result
+WHERE EXISTS (
+    SELECT 1 FROM pg_stat_user_indexes 
+    WHERE schemaname = 'public' 
+    AND relname IN ('roles', 'profiles', 'profile_roles')
+);

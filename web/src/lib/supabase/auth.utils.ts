@@ -22,18 +22,28 @@ export async function hasRole(
   roleKey: string,
   orgId: string | null = null
 ): Promise<boolean> {
-  const { data, error } = await supabase.rpc('has_role', {
-    profile_id: profileId,
-    role_key: roleKey,
-    org_id: orgId
-  });
+  try {
+    if (!profileId || !roleKey) {
+      console.warn('hasRole: profileId and roleKey are required');
+      return false;
+    }
 
-  if (error) {
-    console.error('Error checking role:', error);
+    const { data, error } = await supabase.rpc('has_role', {
+      profile_id: profileId,
+      role_key: roleKey,
+      org_id: orgId
+    });
+
+    if (error) {
+      console.error('Error checking role:', error);
+      return false;
+    }
+
+    return Boolean(data);
+  } catch (err) {
+    console.error('Unexpected error in hasRole:', err);
     return false;
   }
-
-  return data || false;
 }
 
 /**
@@ -189,9 +199,10 @@ export async function getUsersWithRole(roleKey: string, orgId: string | null = n
   const { data, error } = await supabase
     .from('profile_roles')
     .select(`
-      profile:profiles(*)
+      profile:profiles(*),
+      role:roles!inner(*)
     `)
-    .eq('role:roles.key', roleKey)
+    .eq('role.key', roleKey)
     .eq('org_id', orgId)
     .eq('deleted_at', null);
 

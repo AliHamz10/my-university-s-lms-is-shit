@@ -20,7 +20,7 @@ CREATE TABLE public.roles (
 -- Create profiles table (maps to auth.users)
 CREATE TABLE public.profiles (
     id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
-    org_id UUID NULL, -- Multi-org support
+    org_id UUID NULL CHECK (org_id IS NULL OR org_id != '00000000-0000-0000-0000-000000000000'::UUID), -- Multi-org support
     email TEXT NOT NULL UNIQUE,
     first_name TEXT NOT NULL CHECK (LENGTH(first_name) >= 1 AND LENGTH(first_name) <= 100),
     last_name TEXT NOT NULL CHECK (LENGTH(last_name) >= 1 AND LENGTH(last_name) <= 100),
@@ -49,8 +49,9 @@ CREATE TABLE public.profile_roles (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     profile_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
     role_id UUID NOT NULL REFERENCES public.roles(id) ON DELETE RESTRICT,
-    org_id UUID NULL, -- Multi-org support
+    org_id UUID NULL CHECK (org_id IS NULL OR org_id != '00000000-0000-0000-0000-000000000000'::UUID), -- Multi-org support
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     deleted_at TIMESTAMPTZ NULL,
     
     -- Unique constraint: one role per profile per org (null org_id treated as global)
@@ -96,13 +97,15 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
--- Create trigger function for soft delete
-CREATE OR REPLACE FUNCTION public.soft_delete()
+-- Create trigger function for soft delete (when DELETE is attempted)
+CREATE OR REPLACE FUNCTION public.soft_delete_trigger()
 RETURNS TRIGGER AS $$
 BEGIN
     -- Set deleted_at instead of actually deleting
-    NEW.deleted_at = NOW();
-    RETURN NEW;
+    UPDATE public.profiles SET deleted_at = NOW() WHERE id = OLD.id;
+    UPDATE public.roles SET deleted_at = NOW() WHERE id = OLD.id;
+    UPDATE public.profile_roles SET deleted_at = NOW() WHERE id = OLD.id;
+    RETURN NULL; -- Prevent actual deletion
 END;
 $$ LANGUAGE plpgsql;
 

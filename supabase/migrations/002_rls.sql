@@ -18,16 +18,7 @@ CREATE POLICY "Anyone can read roles" ON public.roles
 CREATE POLICY "Admins can manage roles" ON public.roles
     FOR ALL
     TO authenticated
-    USING (
-        EXISTS (
-            SELECT 1 FROM public.profile_roles pr
-            JOIN public.roles r ON pr.role_id = r.id
-            WHERE pr.profile_id = auth.uid()
-            AND r.key = 'ADMIN'
-            AND pr.org_id IS NULL  -- Only global admins can manage roles
-            AND pr.deleted_at IS NULL
-        )
-    );
+    USING (public.is_admin(NULL));
 
 -- RLS Policies for profiles table
 -- Users can read and update their own profile
@@ -53,25 +44,8 @@ CREATE POLICY "Admins can read profiles in org" ON public.profiles
     TO authenticated
     USING (
         deleted_at IS NULL AND (
-            -- Global admin can see all profiles
-            EXISTS (
-                SELECT 1 FROM public.profile_roles pr
-                JOIN public.roles r ON pr.role_id = r.id
-                WHERE pr.profile_id = auth.uid()
-                AND r.key = 'ADMIN'
-                AND pr.org_id IS NULL
-                AND pr.deleted_at IS NULL
-            )
-            OR
-            -- Org admin can see profiles in same org (including null org_id profiles)
-            EXISTS (
-                SELECT 1 FROM public.profile_roles pr
-                JOIN public.roles r ON pr.role_id = r.id
-                WHERE pr.profile_id = auth.uid()
-                AND r.key = 'ADMIN'
-                AND (pr.org_id = profiles.org_id OR (pr.org_id IS NULL AND profiles.org_id IS NULL))
-                AND pr.deleted_at IS NULL
-            )
+            public.is_admin(NULL) OR  -- Global admin can see all profiles
+            public.is_admin(profiles.org_id)  -- Org admin can see profiles in same org
         )
     );
 
@@ -81,25 +55,8 @@ CREATE POLICY "Admins can update profiles in org" ON public.profiles
     TO authenticated
     USING (
         deleted_at IS NULL AND (
-            -- Global admin can update all profiles
-            EXISTS (
-                SELECT 1 FROM public.profile_roles pr
-                JOIN public.roles r ON pr.role_id = r.id
-                WHERE pr.profile_id = auth.uid()
-                AND r.key = 'ADMIN'
-                AND pr.org_id IS NULL
-                AND pr.deleted_at IS NULL
-            )
-            OR
-            -- Org admin can update profiles in same org (including null org_id profiles)
-            EXISTS (
-                SELECT 1 FROM public.profile_roles pr
-                JOIN public.roles r ON pr.role_id = r.id
-                WHERE pr.profile_id = auth.uid()
-                AND r.key = 'ADMIN'
-                AND (pr.org_id = profiles.org_id OR (pr.org_id IS NULL AND profiles.org_id IS NULL))
-                AND pr.deleted_at IS NULL
-            )
+            public.is_admin(NULL) OR  -- Global admin can update all profiles
+            public.is_admin(profiles.org_id)  -- Org admin can update profiles in same org
         )
     );
 
@@ -116,25 +73,8 @@ CREATE POLICY "Admins can manage roles in org" ON public.profile_roles
     TO authenticated
     USING (
         deleted_at IS NULL AND (
-            -- Global admin can manage all role assignments
-            EXISTS (
-                SELECT 1 FROM public.profile_roles pr
-                JOIN public.roles r ON pr.role_id = r.id
-                WHERE pr.profile_id = auth.uid()
-                AND r.key = 'ADMIN'
-                AND pr.org_id IS NULL
-                AND pr.deleted_at IS NULL
-            )
-            OR
-            -- Org admin can manage role assignments in same org (including null org_id)
-            EXISTS (
-                SELECT 1 FROM public.profile_roles pr
-                JOIN public.roles r ON pr.role_id = r.id
-                WHERE pr.profile_id = auth.uid()
-                AND r.key = 'ADMIN'
-                AND (pr.org_id = profile_roles.org_id OR (pr.org_id IS NULL AND profile_roles.org_id IS NULL))
-                AND pr.deleted_at IS NULL
-            )
+            public.is_admin(NULL) OR  -- Global admin can manage all role assignments
+            public.is_admin(profile_roles.org_id)  -- Org admin can manage role assignments in same org
         )
     );
 

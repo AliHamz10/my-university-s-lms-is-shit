@@ -10,6 +10,12 @@ The system includes three main tables:
 - `profiles` - User profiles linked to auth.users
 - `profile_roles` - Many-to-many relationship between profiles and roles
 
+## TypeScript Files
+
+The TypeScript utilities are located in the web application:
+- `web/src/lib/supabase/db.types.ts` - TypeScript type definitions
+- `web/src/lib/supabase/auth.utils.ts` - Authentication and authorization utilities
+
 ## Migration Files
 
 1. `001_core.sql` - Core tables, functions, and triggers
@@ -118,7 +124,7 @@ SELECT public.is_admin(NULL);
 ### TypeScript/JavaScript
 
 ```typescript
-import { hasRole, grantRole, getUserRoles } from './supabase/auth.utils';
+import { hasRole, grantRole, getUserRoles } from '@/lib/supabase/auth.utils';
 
 // Check if user has admin role
 const isAdmin = await hasRole(userId, 'ADMIN');

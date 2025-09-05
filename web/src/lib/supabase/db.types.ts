@@ -40,6 +40,7 @@ export interface ProfileRole {
   role_id: string;
   org_id: string | null;
   created_at: string;
+  updated_at: string;
   deleted_at: string | null;
 }
 
