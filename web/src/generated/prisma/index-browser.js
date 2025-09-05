@@ -120,11 +120,43 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.UserScalarFieldEnum = {
+exports.Prisma.RoleScalarFieldEnum = {
   id: 'id',
+  key: 'key',
+  name: 'name',
+  description: 'description',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.ProfileScalarFieldEnum = {
+  id: 'id',
+  orgId: 'orgId',
   email: 'email',
-  name: 'name'
+  firstName: 'firstName',
+  lastName: 'lastName',
+  username: 'username',
+  avatarUrl: 'avatarUrl',
+  status: 'status',
+  locale: 'locale',
+  emailVerifiedAt: 'emailVerifiedAt',
+  failedLoginAttempts: 'failedLoginAttempts',
+  lockedUntil: 'lockedUntil',
+  lastLoginAt: 'lastLoginAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.ProfileRoleScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  roleId: 'roleId',
+  orgId: 'orgId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -141,10 +173,26 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.UserStatus = exports.$Enums.UserStatus = {
+  active: 'active',
+  inactive: 'inactive',
+  suspended: 'suspended',
+  pending: 'pending'
+};
 
+exports.UserLocale = exports.$Enums.UserLocale = {
+  en: 'en',
+  es: 'es',
+  fr: 'fr',
+  de: 'de',
+  ar: 'ar',
+  ur: 'ur'
+};
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  Role: 'Role',
+  Profile: 'Profile',
+  ProfileRole: 'ProfileRole'
 };
 
 /**

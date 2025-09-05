@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -15,10 +12,79 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-// Example model to validate migrations; adjust as needed
-model User {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  email     String   @unique
-  name      String?
+// ENUM types
+enum UserStatus {
+  active
+  inactive
+  suspended
+  pending
+}
+
+enum UserLocale {
+  en
+  es
+  fr
+  de
+  ar
+  ur
+}
+
+// Roles table
+model Role {
+  id          String    @id @default(uuid())
+  key         String    @unique
+  name        String
+  description String?
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  // Relations
+  profileRoles ProfileRole[]
+
+  @@map("roles")
+}
+
+// Profiles table (maps to auth.users)
+model Profile {
+  id                  String     @id @default(uuid())
+  orgId               String?    @map("org_id")
+  email               String     @unique
+  firstName           String     @map("first_name")
+  lastName            String     @map("last_name")
+  username            String?    @unique
+  avatarUrl           String?    @map("avatar_url")
+  status              UserStatus @default(active)
+  locale              UserLocale @default(en)
+  emailVerifiedAt     DateTime?  @map("email_verified_at")
+  failedLoginAttempts Int        @default(0) @map("failed_login_attempts")
+  lockedUntil         DateTime?  @map("locked_until")
+  lastLoginAt         DateTime?  @map("last_login_at")
+  createdAt           DateTime   @default(now()) @map("created_at")
+  updatedAt           DateTime   @updatedAt @map("updated_at")
+  deletedAt           DateTime?  @map("deleted_at")
+
+  // Relations
+  profileRoles ProfileRole[]
+
+  @@map("profiles")
+}
+
+// Profile-Role junction table
+model ProfileRole {
+  id        String    @id @default(uuid())
+  profileId String    @map("profile_id")
+  roleId    String    @map("role_id")
+  orgId     String?   @map("org_id")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  // Relations
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  role    Role    @relation(fields: [roleId], references: [id], onDelete: Restrict)
+
+  // Unique constraint: one role per profile per org
+  @@unique([profileId, roleId, orgId], map: "profile_roles_profile_id_role_id_org_id_key")
+  @@map("profile_roles")
 }
