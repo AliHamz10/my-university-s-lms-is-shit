@@ -159,6 +159,76 @@ exports.Prisma.ProfileRoleScalarFieldEnum = {
   deletedAt: 'deletedAt'
 };
 
+exports.Prisma.DepartmentScalarFieldEnum = {
+  id: 'id',
+  orgId: 'orgId',
+  code: 'code',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TermScalarFieldEnum = {
+  id: 'id',
+  orgId: 'orgId',
+  code: 'code',
+  name: 'name',
+  dateStart: 'dateStart',
+  dateEnd: 'dateEnd',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CourseScalarFieldEnum = {
+  id: 'id',
+  orgId: 'orgId',
+  departmentId: 'departmentId',
+  code: 'code',
+  title: 'title',
+  description: 'description',
+  creditHours: 'creditHours',
+  createdById: 'createdById',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CourseOfferingScalarFieldEnum = {
+  id: 'id',
+  orgId: 'orgId',
+  courseId: 'courseId',
+  termId: 'termId',
+  sectionCode: 'sectionCode',
+  modality: 'modality',
+  capacity: 'capacity',
+  waitlistCapacity: 'waitlistCapacity',
+  isPublished: 'isPublished',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TeachingAssignmentScalarFieldEnum = {
+  id: 'id',
+  courseOfferingId: 'courseOfferingId',
+  instructorProfileId: 'instructorProfileId',
+  role: 'role',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.EnrollmentScalarFieldEnum = {
+  id: 'id',
+  courseOfferingId: 'courseOfferingId',
+  studentProfileId: 'studentProfileId',
+  status: 'status',
+  gradeScheme: 'gradeScheme',
+  gradeValue: 'gradeValue',
+  enrolledAt: 'enrolledAt',
+  droppedAt: 'droppedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -189,10 +259,35 @@ exports.UserLocale = exports.$Enums.UserLocale = {
   ur: 'ur'
 };
 
+exports.ModalityType = exports.$Enums.ModalityType = {
+  in_person: 'in_person',
+  online: 'online',
+  hybrid: 'hybrid'
+};
+
+exports.TeachingRole = exports.$Enums.TeachingRole = {
+  primary: 'primary',
+  co_instructor: 'co_instructor',
+  ta: 'ta'
+};
+
+exports.EnrollmentStatus = exports.$Enums.EnrollmentStatus = {
+  enrolled: 'enrolled',
+  waitlisted: 'waitlisted',
+  dropped: 'dropped',
+  completed: 'completed'
+};
+
 exports.Prisma.ModelName = {
   Role: 'Role',
   Profile: 'Profile',
-  ProfileRole: 'ProfileRole'
+  ProfileRole: 'ProfileRole',
+  Department: 'Department',
+  Term: 'Term',
+  Course: 'Course',
+  CourseOffering: 'CourseOffering',
+  TeachingAssignment: 'TeachingAssignment',
+  Enrollment: 'Enrollment'
 };
 
 /**
