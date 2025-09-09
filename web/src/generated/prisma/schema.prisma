@@ -88,6 +88,8 @@ model Profile {
   createdCourses      Course[]
   teachingAssignments TeachingAssignment[]
   enrollments         Enrollment[]
+  Assignment          Assignment[]
+  Submission          Submission[]
 
   @@map("profiles")
 }
@@ -191,6 +193,7 @@ model CourseOffering {
   term                Term                 @relation(fields: [termId], references: [id], onDelete: Restrict)
   teachingAssignments TeachingAssignment[]
   enrollments         Enrollment[]
+  Assignment          Assignment[]
 
   // Unique constraint per course, term, and section
   @@unique([courseId, termId, sectionCode])
@@ -234,4 +237,55 @@ model Enrollment {
   // Unique constraint per offering and student
   @@unique([courseOfferingId, studentProfileId])
   @@map("enrollments")
+}
+
+// Assignment and Submission domain
+
+enum SubmissionStatus {
+  draft
+  submitted
+  graded
+  returned
+}
+
+model Assignment {
+  id               String    @id @default(uuid())
+  courseOfferingId String    @map("course_offering_id")
+  title            String
+  description      String?
+  dueAt            DateTime? @map("due_at")
+  points           Int       @default(100)
+  isPublished      Boolean   @default(false) @map("is_published")
+  createdById      String?   @map("created_by")
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  courseOffering CourseOffering @relation(fields: [courseOfferingId], references: [id], onDelete: Cascade)
+  createdBy      Profile?       @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  submissions    Submission[]
+
+  @@map("assignments")
+}
+
+model Submission {
+  id               String           @id @default(uuid())
+  assignmentId     String           @map("assignment_id")
+  studentProfileId String           @map("student_profile_id")
+  status           SubmissionStatus @default(draft)
+  submittedAt      DateTime?        @map("submitted_at")
+  content          String?
+  attachmentUrl    String?          @map("attachment_url")
+  score            Int?
+  feedback         String?
+  createdAt        DateTime         @default(now()) @map("created_at")
+  updatedAt        DateTime         @updatedAt @map("updated_at")
+
+  // Relations
+  assignment     Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  studentProfile Profile    @relation(fields: [studentProfileId], references: [id], onDelete: Restrict)
+
+  // A student can submit at most once per assignment (extensions/edits overwrite)
+  @@unique([assignmentId, studentProfileId])
+  @@map("submissions")
 }

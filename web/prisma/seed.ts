@@ -230,6 +230,82 @@ async function main() {
   });
 
   console.log('✅ Teaching assignments created');
+  
+  // Create a test student profile
+  const testStudentId = '00000000-0000-0000-0000-000000000002';
+  const testStudent = await prisma.profile.upsert({
+    where: { id: testStudentId },
+    update: {},
+    create: {
+      id: testStudentId,
+      email: 'student1@university.edu',
+      firstName: 'Alice',
+      lastName: 'Student',
+      username: 'student1',
+      status: 'active',
+      locale: 'en',
+      emailVerifiedAt: new Date(),
+      lastLoginAt: new Date(),
+    },
+  });
+
+  // Enroll the student into CS101 offering
+  await prisma.enrollment.upsert({
+    where: {
+      courseOfferingId_studentProfileId: {
+        courseOfferingId: cs101Offering.id,
+        studentProfileId: testStudent.id,
+      },
+    },
+    update: {},
+    create: {
+      courseOfferingId: cs101Offering.id,
+      studentProfileId: testStudent.id,
+      status: 'enrolled',
+    },
+  });
+
+  // Create an assignment for CS101 offering
+  const assignment1 = await prisma.assignment.upsert({
+    where: { id: 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb' },
+    update: {},
+    create: {
+      id: 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+      courseOfferingId: cs101Offering.id,
+      title: 'Homework 1: Intro to Variables',
+      description: 'Solve the attached problems on variables and data types.',
+      dueAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      points: 100,
+      isPublished: true,
+      createdById: testAdminId,
+    },
+  });
+
+  // Create a submission by the student
+  await prisma.submission.upsert({
+    where: {
+      assignmentId_studentProfileId: {
+        assignmentId: assignment1.id,
+        studentProfileId: testStudent.id,
+      },
+    },
+    update: {
+      status: 'submitted',
+      submittedAt: new Date(),
+      content: 'My answers are in the attached document.',
+      attachmentUrl: 'https://example.com/submissions/hw1-student1.pdf',
+    },
+    create: {
+      assignmentId: assignment1.id,
+      studentProfileId: testStudent.id,
+      status: 'submitted',
+      submittedAt: new Date(),
+      content: 'My answers are in the attached document.',
+      attachmentUrl: 'https://example.com/submissions/hw1-student1.pdf',
+    },
+  });
+
+  console.log('✅ Student, enrollment, assignment, and submission created');
   console.log('🎉 Database seeding completed successfully!');
 }
 

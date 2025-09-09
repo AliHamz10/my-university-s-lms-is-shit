@@ -229,6 +229,33 @@ exports.Prisma.EnrollmentScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AssignmentScalarFieldEnum = {
+  id: 'id',
+  courseOfferingId: 'courseOfferingId',
+  title: 'title',
+  description: 'description',
+  dueAt: 'dueAt',
+  points: 'points',
+  isPublished: 'isPublished',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SubmissionScalarFieldEnum = {
+  id: 'id',
+  assignmentId: 'assignmentId',
+  studentProfileId: 'studentProfileId',
+  status: 'status',
+  submittedAt: 'submittedAt',
+  content: 'content',
+  attachmentUrl: 'attachmentUrl',
+  score: 'score',
+  feedback: 'feedback',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -278,6 +305,13 @@ exports.EnrollmentStatus = exports.$Enums.EnrollmentStatus = {
   completed: 'completed'
 };
 
+exports.SubmissionStatus = exports.$Enums.SubmissionStatus = {
+  draft: 'draft',
+  submitted: 'submitted',
+  graded: 'graded',
+  returned: 'returned'
+};
+
 exports.Prisma.ModelName = {
   Role: 'Role',
   Profile: 'Profile',
@@ -287,7 +321,9 @@ exports.Prisma.ModelName = {
   Course: 'Course',
   CourseOffering: 'CourseOffering',
   TeachingAssignment: 'TeachingAssignment',
-  Enrollment: 'Enrollment'
+  Enrollment: 'Enrollment',
+  Assignment: 'Assignment',
+  Submission: 'Submission'
 };
 
 /**
