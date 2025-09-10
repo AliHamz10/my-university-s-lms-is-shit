@@ -256,9 +256,112 @@ exports.Prisma.SubmissionScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ExamScalarFieldEnum = {
+  id: 'id',
+  courseOfferingId: 'courseOfferingId',
+  title: 'title',
+  description: 'description',
+  examType: 'examType',
+  status: 'status',
+  points: 'points',
+  timeLimitMinutes: 'timeLimitMinutes',
+  maxAttempts: 'maxAttempts',
+  isProctored: 'isProctored',
+  instructions: 'instructions',
+  startAt: 'startAt',
+  endAt: 'endAt',
+  isPublished: 'isPublished',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ExamAttemptScalarFieldEnum = {
+  id: 'id',
+  examId: 'examId',
+  studentProfileId: 'studentProfileId',
+  attemptNumber: 'attemptNumber',
+  startedAt: 'startedAt',
+  submittedAt: 'submittedAt',
+  timeSpentMinutes: 'timeSpentMinutes',
+  score: 'score',
+  isCompleted: 'isCompleted',
+  answers: 'answers',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ResultScalarFieldEnum = {
+  id: 'id',
+  courseOfferingId: 'courseOfferingId',
+  studentProfileId: 'studentProfileId',
+  examId: 'examId',
+  assignmentId: 'assignmentId',
+  examAttemptId: 'examAttemptId',
+  submissionId: 'submissionId',
+  resultType: 'resultType',
+  title: 'title',
+  pointsEarned: 'pointsEarned',
+  pointsPossible: 'pointsPossible',
+  percentage: 'percentage',
+  letterGrade: 'letterGrade',
+  status: 'status',
+  gradedAt: 'gradedAt',
+  gradedById: 'gradedById',
+  feedback: 'feedback',
+  isCurved: 'isCurved',
+  curveValue: 'curveValue',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TranscriptScalarFieldEnum = {
+  id: 'id',
+  studentProfileId: 'studentProfileId',
+  termId: 'termId',
+  status: 'status',
+  gpa: 'gpa',
+  totalCredits: 'totalCredits',
+  earnedCredits: 'earnedCredits',
+  isOfficial: 'isOfficial',
+  generatedAt: 'generatedAt',
+  generatedById: 'generatedById',
+  approvedAt: 'approvedAt',
+  approvedById: 'approvedById',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TranscriptItemScalarFieldEnum = {
+  id: 'id',
+  transcriptId: 'transcriptId',
+  courseOfferingId: 'courseOfferingId',
+  courseCode: 'courseCode',
+  courseTitle: 'courseTitle',
+  creditHours: 'creditHours',
+  letterGrade: 'letterGrade',
+  pointsEarned: 'pointsEarned',
+  pointsPossible: 'pointsPossible',
+  percentage: 'percentage',
+  termCode: 'termCode',
+  termName: 'termName',
+  year: 'year',
+  semester: 'semester',
+  isCompleted: 'isCompleted',
+  isPassed: 'isPassed',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -269,6 +372,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.UserStatus = exports.$Enums.UserStatus = {
   active: 'active',
@@ -312,6 +421,39 @@ exports.SubmissionStatus = exports.$Enums.SubmissionStatus = {
   returned: 'returned'
 };
 
+exports.ExamType = exports.$Enums.ExamType = {
+  quiz: 'quiz',
+  midterm: 'midterm',
+  final: 'final',
+  assignment: 'assignment',
+  project: 'project',
+  presentation: 'presentation'
+};
+
+exports.ExamStatus = exports.$Enums.ExamStatus = {
+  draft: 'draft',
+  published: 'published',
+  active: 'active',
+  completed: 'completed',
+  archived: 'archived'
+};
+
+exports.ResultStatus = exports.$Enums.ResultStatus = {
+  pending: 'pending',
+  graded: 'graded',
+  approved: 'approved',
+  disputed: 'disputed',
+  final: 'final'
+};
+
+exports.TranscriptStatus = exports.$Enums.TranscriptStatus = {
+  draft: 'draft',
+  pending_approval: 'pending_approval',
+  approved: 'approved',
+  official: 'official',
+  archived: 'archived'
+};
+
 exports.Prisma.ModelName = {
   Role: 'Role',
   Profile: 'Profile',
@@ -323,7 +465,12 @@ exports.Prisma.ModelName = {
   TeachingAssignment: 'TeachingAssignment',
   Enrollment: 'Enrollment',
   Assignment: 'Assignment',
-  Submission: 'Submission'
+  Submission: 'Submission',
+  Exam: 'Exam',
+  ExamAttempt: 'ExamAttempt',
+  Result: 'Result',
+  Transcript: 'Transcript',
+  TranscriptItem: 'TranscriptItem'
 };
 
 /**
