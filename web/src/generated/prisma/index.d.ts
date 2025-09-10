@@ -1890,8 +1890,8 @@ export namespace Prisma {
     createdCourses: number
     teachingAssignments: number
     enrollments: number
-    Assignment: number
-    Submission: number
+    createdAssignments: number
+    submissions: number
   }
 
   export type ProfileCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1899,8 +1899,8 @@ export namespace Prisma {
     createdCourses?: boolean | ProfileCountOutputTypeCountCreatedCoursesArgs
     teachingAssignments?: boolean | ProfileCountOutputTypeCountTeachingAssignmentsArgs
     enrollments?: boolean | ProfileCountOutputTypeCountEnrollmentsArgs
-    Assignment?: boolean | ProfileCountOutputTypeCountAssignmentArgs
-    Submission?: boolean | ProfileCountOutputTypeCountSubmissionArgs
+    createdAssignments?: boolean | ProfileCountOutputTypeCountCreatedAssignmentsArgs
+    submissions?: boolean | ProfileCountOutputTypeCountSubmissionsArgs
   }
 
   // Custom InputTypes
@@ -1945,14 +1945,14 @@ export namespace Prisma {
   /**
    * ProfileCountOutputType without action
    */
-  export type ProfileCountOutputTypeCountAssignmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProfileCountOutputTypeCountCreatedAssignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AssignmentWhereInput
   }
 
   /**
    * ProfileCountOutputType without action
    */
-  export type ProfileCountOutputTypeCountSubmissionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProfileCountOutputTypeCountSubmissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SubmissionWhereInput
   }
 
@@ -2057,13 +2057,13 @@ export namespace Prisma {
   export type CourseOfferingCountOutputType = {
     teachingAssignments: number
     enrollments: number
-    Assignment: number
+    assignments: number
   }
 
   export type CourseOfferingCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     teachingAssignments?: boolean | CourseOfferingCountOutputTypeCountTeachingAssignmentsArgs
     enrollments?: boolean | CourseOfferingCountOutputTypeCountEnrollmentsArgs
-    Assignment?: boolean | CourseOfferingCountOutputTypeCountAssignmentArgs
+    assignments?: boolean | CourseOfferingCountOutputTypeCountAssignmentsArgs
   }
 
   // Custom InputTypes
@@ -2094,7 +2094,7 @@ export namespace Prisma {
   /**
    * CourseOfferingCountOutputType without action
    */
-  export type CourseOfferingCountOutputTypeCountAssignmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CourseOfferingCountOutputTypeCountAssignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AssignmentWhereInput
   }
 
@@ -3520,8 +3520,8 @@ export namespace Prisma {
     createdCourses?: boolean | Profile$createdCoursesArgs<ExtArgs>
     teachingAssignments?: boolean | Profile$teachingAssignmentsArgs<ExtArgs>
     enrollments?: boolean | Profile$enrollmentsArgs<ExtArgs>
-    Assignment?: boolean | Profile$AssignmentArgs<ExtArgs>
-    Submission?: boolean | Profile$SubmissionArgs<ExtArgs>
+    createdAssignments?: boolean | Profile$createdAssignmentsArgs<ExtArgs>
+    submissions?: boolean | Profile$submissionsArgs<ExtArgs>
     _count?: boolean | ProfileCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["profile"]>
 
@@ -3588,8 +3588,8 @@ export namespace Prisma {
     createdCourses?: boolean | Profile$createdCoursesArgs<ExtArgs>
     teachingAssignments?: boolean | Profile$teachingAssignmentsArgs<ExtArgs>
     enrollments?: boolean | Profile$enrollmentsArgs<ExtArgs>
-    Assignment?: boolean | Profile$AssignmentArgs<ExtArgs>
-    Submission?: boolean | Profile$SubmissionArgs<ExtArgs>
+    createdAssignments?: boolean | Profile$createdAssignmentsArgs<ExtArgs>
+    submissions?: boolean | Profile$submissionsArgs<ExtArgs>
     _count?: boolean | ProfileCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProfileIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3602,8 +3602,8 @@ export namespace Prisma {
       createdCourses: Prisma.$CoursePayload<ExtArgs>[]
       teachingAssignments: Prisma.$TeachingAssignmentPayload<ExtArgs>[]
       enrollments: Prisma.$EnrollmentPayload<ExtArgs>[]
-      Assignment: Prisma.$AssignmentPayload<ExtArgs>[]
-      Submission: Prisma.$SubmissionPayload<ExtArgs>[]
+      createdAssignments: Prisma.$AssignmentPayload<ExtArgs>[]
+      submissions: Prisma.$SubmissionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4020,8 +4020,8 @@ export namespace Prisma {
     createdCourses<T extends Profile$createdCoursesArgs<ExtArgs> = {}>(args?: Subset<T, Profile$createdCoursesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     teachingAssignments<T extends Profile$teachingAssignmentsArgs<ExtArgs> = {}>(args?: Subset<T, Profile$teachingAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeachingAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     enrollments<T extends Profile$enrollmentsArgs<ExtArgs> = {}>(args?: Subset<T, Profile$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Assignment<T extends Profile$AssignmentArgs<ExtArgs> = {}>(args?: Subset<T, Profile$AssignmentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Submission<T extends Profile$SubmissionArgs<ExtArgs> = {}>(args?: Subset<T, Profile$SubmissionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdAssignments<T extends Profile$createdAssignmentsArgs<ExtArgs> = {}>(args?: Subset<T, Profile$createdAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    submissions<T extends Profile$submissionsArgs<ExtArgs> = {}>(args?: Subset<T, Profile$submissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4551,9 +4551,9 @@ export namespace Prisma {
   }
 
   /**
-   * Profile.Assignment
+   * Profile.createdAssignments
    */
-  export type Profile$AssignmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Profile$createdAssignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Assignment
      */
@@ -4575,9 +4575,9 @@ export namespace Prisma {
   }
 
   /**
-   * Profile.Submission
+   * Profile.submissions
    */
-  export type Profile$SubmissionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Profile$submissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Submission
      */
@@ -9414,7 +9414,7 @@ export namespace Prisma {
     term?: boolean | TermDefaultArgs<ExtArgs>
     teachingAssignments?: boolean | CourseOffering$teachingAssignmentsArgs<ExtArgs>
     enrollments?: boolean | CourseOffering$enrollmentsArgs<ExtArgs>
-    Assignment?: boolean | CourseOffering$AssignmentArgs<ExtArgs>
+    assignments?: boolean | CourseOffering$assignmentsArgs<ExtArgs>
     _count?: boolean | CourseOfferingCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["courseOffering"]>
 
@@ -9470,7 +9470,7 @@ export namespace Prisma {
     term?: boolean | TermDefaultArgs<ExtArgs>
     teachingAssignments?: boolean | CourseOffering$teachingAssignmentsArgs<ExtArgs>
     enrollments?: boolean | CourseOffering$enrollmentsArgs<ExtArgs>
-    Assignment?: boolean | CourseOffering$AssignmentArgs<ExtArgs>
+    assignments?: boolean | CourseOffering$assignmentsArgs<ExtArgs>
     _count?: boolean | CourseOfferingCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CourseOfferingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9489,7 +9489,7 @@ export namespace Prisma {
       term: Prisma.$TermPayload<ExtArgs>
       teachingAssignments: Prisma.$TeachingAssignmentPayload<ExtArgs>[]
       enrollments: Prisma.$EnrollmentPayload<ExtArgs>[]
-      Assignment: Prisma.$AssignmentPayload<ExtArgs>[]
+      assignments: Prisma.$AssignmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9901,7 +9901,7 @@ export namespace Prisma {
     term<T extends TermDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TermDefaultArgs<ExtArgs>>): Prisma__TermClient<$Result.GetResult<Prisma.$TermPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     teachingAssignments<T extends CourseOffering$teachingAssignmentsArgs<ExtArgs> = {}>(args?: Subset<T, CourseOffering$teachingAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeachingAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     enrollments<T extends CourseOffering$enrollmentsArgs<ExtArgs> = {}>(args?: Subset<T, CourseOffering$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Assignment<T extends CourseOffering$AssignmentArgs<ExtArgs> = {}>(args?: Subset<T, CourseOffering$AssignmentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    assignments<T extends CourseOffering$assignmentsArgs<ExtArgs> = {}>(args?: Subset<T, CourseOffering$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10386,9 +10386,9 @@ export namespace Prisma {
   }
 
   /**
-   * CourseOffering.Assignment
+   * CourseOffering.assignments
    */
-  export type CourseOffering$AssignmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CourseOffering$assignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Assignment
      */
@@ -13852,11 +13852,11 @@ export namespace Prisma {
   }
 
   export type SubmissionAvgAggregateOutputType = {
-    score: number | null
+    score: Decimal | null
   }
 
   export type SubmissionSumAggregateOutputType = {
-    score: number | null
+    score: Decimal | null
   }
 
   export type SubmissionMinAggregateOutputType = {
@@ -13867,7 +13867,7 @@ export namespace Prisma {
     submittedAt: Date | null
     content: string | null
     attachmentUrl: string | null
-    score: number | null
+    score: Decimal | null
     feedback: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -13881,7 +13881,7 @@ export namespace Prisma {
     submittedAt: Date | null
     content: string | null
     attachmentUrl: string | null
-    score: number | null
+    score: Decimal | null
     feedback: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -14048,7 +14048,7 @@ export namespace Prisma {
     submittedAt: Date | null
     content: string | null
     attachmentUrl: string | null
-    score: number | null
+    score: Decimal | null
     feedback: string | null
     createdAt: Date
     updatedAt: Date
@@ -14163,7 +14163,7 @@ export namespace Prisma {
       submittedAt: Date | null
       content: string | null
       attachmentUrl: string | null
-      score: number | null
+      score: Prisma.Decimal | null
       feedback: string | null
       createdAt: Date
       updatedAt: Date
@@ -14599,7 +14599,7 @@ export namespace Prisma {
     readonly submittedAt: FieldRef<"Submission", 'DateTime'>
     readonly content: FieldRef<"Submission", 'String'>
     readonly attachmentUrl: FieldRef<"Submission", 'String'>
-    readonly score: FieldRef<"Submission", 'Int'>
+    readonly score: FieldRef<"Submission", 'Decimal'>
     readonly feedback: FieldRef<"Submission", 'String'>
     readonly createdAt: FieldRef<"Submission", 'DateTime'>
     readonly updatedAt: FieldRef<"Submission", 'DateTime'>
@@ -15363,6 +15363,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Decimal'
+   */
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal[]'
+   */
+  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -15468,8 +15482,8 @@ export namespace Prisma {
     createdCourses?: CourseListRelationFilter
     teachingAssignments?: TeachingAssignmentListRelationFilter
     enrollments?: EnrollmentListRelationFilter
-    Assignment?: AssignmentListRelationFilter
-    Submission?: SubmissionListRelationFilter
+    createdAssignments?: AssignmentListRelationFilter
+    submissions?: SubmissionListRelationFilter
   }
 
   export type ProfileOrderByWithRelationInput = {
@@ -15493,8 +15507,8 @@ export namespace Prisma {
     createdCourses?: CourseOrderByRelationAggregateInput
     teachingAssignments?: TeachingAssignmentOrderByRelationAggregateInput
     enrollments?: EnrollmentOrderByRelationAggregateInput
-    Assignment?: AssignmentOrderByRelationAggregateInput
-    Submission?: SubmissionOrderByRelationAggregateInput
+    createdAssignments?: AssignmentOrderByRelationAggregateInput
+    submissions?: SubmissionOrderByRelationAggregateInput
   }
 
   export type ProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -15521,8 +15535,8 @@ export namespace Prisma {
     createdCourses?: CourseListRelationFilter
     teachingAssignments?: TeachingAssignmentListRelationFilter
     enrollments?: EnrollmentListRelationFilter
-    Assignment?: AssignmentListRelationFilter
-    Submission?: SubmissionListRelationFilter
+    createdAssignments?: AssignmentListRelationFilter
+    submissions?: SubmissionListRelationFilter
   }, "id" | "email" | "username">
 
   export type ProfileOrderByWithAggregationInput = {
@@ -15890,7 +15904,7 @@ export namespace Prisma {
     term?: XOR<TermScalarRelationFilter, TermWhereInput>
     teachingAssignments?: TeachingAssignmentListRelationFilter
     enrollments?: EnrollmentListRelationFilter
-    Assignment?: AssignmentListRelationFilter
+    assignments?: AssignmentListRelationFilter
   }
 
   export type CourseOfferingOrderByWithRelationInput = {
@@ -15909,7 +15923,7 @@ export namespace Prisma {
     term?: TermOrderByWithRelationInput
     teachingAssignments?: TeachingAssignmentOrderByRelationAggregateInput
     enrollments?: EnrollmentOrderByRelationAggregateInput
-    Assignment?: AssignmentOrderByRelationAggregateInput
+    assignments?: AssignmentOrderByRelationAggregateInput
   }
 
   export type CourseOfferingWhereUniqueInput = Prisma.AtLeast<{
@@ -15932,7 +15946,7 @@ export namespace Prisma {
     term?: XOR<TermScalarRelationFilter, TermWhereInput>
     teachingAssignments?: TeachingAssignmentListRelationFilter
     enrollments?: EnrollmentListRelationFilter
-    Assignment?: AssignmentListRelationFilter
+    assignments?: AssignmentListRelationFilter
   }, "id" | "courseId_termId_sectionCode">
 
   export type CourseOfferingOrderByWithAggregationInput = {
@@ -16151,6 +16165,7 @@ export namespace Prisma {
 
   export type AssignmentWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    courseOfferingId_title?: AssignmentCourseOfferingIdTitleCompoundUniqueInput
     AND?: AssignmentWhereInput | AssignmentWhereInput[]
     OR?: AssignmentWhereInput[]
     NOT?: AssignmentWhereInput | AssignmentWhereInput[]
@@ -16166,7 +16181,7 @@ export namespace Prisma {
     courseOffering?: XOR<CourseOfferingScalarRelationFilter, CourseOfferingWhereInput>
     createdBy?: XOR<ProfileNullableScalarRelationFilter, ProfileWhereInput> | null
     submissions?: SubmissionListRelationFilter
-  }, "id">
+  }, "id" | "courseOfferingId_title">
 
   export type AssignmentOrderByWithAggregationInput = {
     id?: SortOrder
@@ -16213,7 +16228,7 @@ export namespace Prisma {
     submittedAt?: DateTimeNullableFilter<"Submission"> | Date | string | null
     content?: StringNullableFilter<"Submission"> | string | null
     attachmentUrl?: StringNullableFilter<"Submission"> | string | null
-    score?: IntNullableFilter<"Submission"> | number | null
+    score?: DecimalNullableFilter<"Submission"> | Decimal | DecimalJsLike | number | string | null
     feedback?: StringNullableFilter<"Submission"> | string | null
     createdAt?: DateTimeFilter<"Submission"> | Date | string
     updatedAt?: DateTimeFilter<"Submission"> | Date | string
@@ -16249,7 +16264,7 @@ export namespace Prisma {
     submittedAt?: DateTimeNullableFilter<"Submission"> | Date | string | null
     content?: StringNullableFilter<"Submission"> | string | null
     attachmentUrl?: StringNullableFilter<"Submission"> | string | null
-    score?: IntNullableFilter<"Submission"> | number | null
+    score?: DecimalNullableFilter<"Submission"> | Decimal | DecimalJsLike | number | string | null
     feedback?: StringNullableFilter<"Submission"> | string | null
     createdAt?: DateTimeFilter<"Submission"> | Date | string
     updatedAt?: DateTimeFilter<"Submission"> | Date | string
@@ -16287,7 +16302,7 @@ export namespace Prisma {
     submittedAt?: DateTimeNullableWithAggregatesFilter<"Submission"> | Date | string | null
     content?: StringNullableWithAggregatesFilter<"Submission"> | string | null
     attachmentUrl?: StringNullableWithAggregatesFilter<"Submission"> | string | null
-    score?: IntNullableWithAggregatesFilter<"Submission"> | number | null
+    score?: DecimalNullableWithAggregatesFilter<"Submission"> | Decimal | DecimalJsLike | number | string | null
     feedback?: StringNullableWithAggregatesFilter<"Submission"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Submission"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Submission"> | Date | string
@@ -16388,8 +16403,8 @@ export namespace Prisma {
     createdCourses?: CourseCreateNestedManyWithoutCreatedByInput
     teachingAssignments?: TeachingAssignmentCreateNestedManyWithoutInstructorProfileInput
     enrollments?: EnrollmentCreateNestedManyWithoutStudentProfileInput
-    Assignment?: AssignmentCreateNestedManyWithoutCreatedByInput
-    Submission?: SubmissionCreateNestedManyWithoutStudentProfileInput
+    createdAssignments?: AssignmentCreateNestedManyWithoutCreatedByInput
+    submissions?: SubmissionCreateNestedManyWithoutStudentProfileInput
   }
 
   export type ProfileUncheckedCreateInput = {
@@ -16413,8 +16428,8 @@ export namespace Prisma {
     createdCourses?: CourseUncheckedCreateNestedManyWithoutCreatedByInput
     teachingAssignments?: TeachingAssignmentUncheckedCreateNestedManyWithoutInstructorProfileInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutStudentProfileInput
-    Assignment?: AssignmentUncheckedCreateNestedManyWithoutCreatedByInput
-    Submission?: SubmissionUncheckedCreateNestedManyWithoutStudentProfileInput
+    createdAssignments?: AssignmentUncheckedCreateNestedManyWithoutCreatedByInput
+    submissions?: SubmissionUncheckedCreateNestedManyWithoutStudentProfileInput
   }
 
   export type ProfileUpdateInput = {
@@ -16438,8 +16453,8 @@ export namespace Prisma {
     createdCourses?: CourseUpdateManyWithoutCreatedByNestedInput
     teachingAssignments?: TeachingAssignmentUpdateManyWithoutInstructorProfileNestedInput
     enrollments?: EnrollmentUpdateManyWithoutStudentProfileNestedInput
-    Assignment?: AssignmentUpdateManyWithoutCreatedByNestedInput
-    Submission?: SubmissionUpdateManyWithoutStudentProfileNestedInput
+    createdAssignments?: AssignmentUpdateManyWithoutCreatedByNestedInput
+    submissions?: SubmissionUpdateManyWithoutStudentProfileNestedInput
   }
 
   export type ProfileUncheckedUpdateInput = {
@@ -16463,8 +16478,8 @@ export namespace Prisma {
     createdCourses?: CourseUncheckedUpdateManyWithoutCreatedByNestedInput
     teachingAssignments?: TeachingAssignmentUncheckedUpdateManyWithoutInstructorProfileNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutStudentProfileNestedInput
-    Assignment?: AssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
-    Submission?: SubmissionUncheckedUpdateManyWithoutStudentProfileNestedInput
+    createdAssignments?: AssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
+    submissions?: SubmissionUncheckedUpdateManyWithoutStudentProfileNestedInput
   }
 
   export type ProfileCreateManyInput = {
@@ -16861,7 +16876,7 @@ export namespace Prisma {
     term: TermCreateNestedOneWithoutCourseOfferingsInput
     teachingAssignments?: TeachingAssignmentCreateNestedManyWithoutCourseOfferingInput
     enrollments?: EnrollmentCreateNestedManyWithoutCourseOfferingInput
-    Assignment?: AssignmentCreateNestedManyWithoutCourseOfferingInput
+    assignments?: AssignmentCreateNestedManyWithoutCourseOfferingInput
   }
 
   export type CourseOfferingUncheckedCreateInput = {
@@ -16878,7 +16893,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     teachingAssignments?: TeachingAssignmentUncheckedCreateNestedManyWithoutCourseOfferingInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseOfferingInput
-    Assignment?: AssignmentUncheckedCreateNestedManyWithoutCourseOfferingInput
+    assignments?: AssignmentUncheckedCreateNestedManyWithoutCourseOfferingInput
   }
 
   export type CourseOfferingUpdateInput = {
@@ -16895,7 +16910,7 @@ export namespace Prisma {
     term?: TermUpdateOneRequiredWithoutCourseOfferingsNestedInput
     teachingAssignments?: TeachingAssignmentUpdateManyWithoutCourseOfferingNestedInput
     enrollments?: EnrollmentUpdateManyWithoutCourseOfferingNestedInput
-    Assignment?: AssignmentUpdateManyWithoutCourseOfferingNestedInput
+    assignments?: AssignmentUpdateManyWithoutCourseOfferingNestedInput
   }
 
   export type CourseOfferingUncheckedUpdateInput = {
@@ -16912,7 +16927,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teachingAssignments?: TeachingAssignmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
-    Assignment?: AssignmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
+    assignments?: AssignmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
   }
 
   export type CourseOfferingCreateManyInput = {
@@ -17107,8 +17122,8 @@ export namespace Prisma {
     isPublished?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    courseOffering: CourseOfferingCreateNestedOneWithoutAssignmentInput
-    createdBy?: ProfileCreateNestedOneWithoutAssignmentInput
+    courseOffering: CourseOfferingCreateNestedOneWithoutAssignmentsInput
+    createdBy?: ProfileCreateNestedOneWithoutCreatedAssignmentsInput
     submissions?: SubmissionCreateNestedManyWithoutAssignmentInput
   }
 
@@ -17135,8 +17150,8 @@ export namespace Prisma {
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    courseOffering?: CourseOfferingUpdateOneRequiredWithoutAssignmentNestedInput
-    createdBy?: ProfileUpdateOneWithoutAssignmentNestedInput
+    courseOffering?: CourseOfferingUpdateOneRequiredWithoutAssignmentsNestedInput
+    createdBy?: ProfileUpdateOneWithoutCreatedAssignmentsNestedInput
     submissions?: SubmissionUpdateManyWithoutAssignmentNestedInput
   }
 
@@ -17197,12 +17212,12 @@ export namespace Prisma {
     submittedAt?: Date | string | null
     content?: string | null
     attachmentUrl?: string | null
-    score?: number | null
+    score?: Decimal | DecimalJsLike | number | string | null
     feedback?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     assignment: AssignmentCreateNestedOneWithoutSubmissionsInput
-    studentProfile: ProfileCreateNestedOneWithoutSubmissionInput
+    studentProfile: ProfileCreateNestedOneWithoutSubmissionsInput
   }
 
   export type SubmissionUncheckedCreateInput = {
@@ -17213,7 +17228,7 @@ export namespace Prisma {
     submittedAt?: Date | string | null
     content?: string | null
     attachmentUrl?: string | null
-    score?: number | null
+    score?: Decimal | DecimalJsLike | number | string | null
     feedback?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17225,12 +17240,12 @@ export namespace Prisma {
     submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    score?: NullableIntFieldUpdateOperationsInput | number | null
+    score?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     feedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignment?: AssignmentUpdateOneRequiredWithoutSubmissionsNestedInput
-    studentProfile?: ProfileUpdateOneRequiredWithoutSubmissionNestedInput
+    studentProfile?: ProfileUpdateOneRequiredWithoutSubmissionsNestedInput
   }
 
   export type SubmissionUncheckedUpdateInput = {
@@ -17241,7 +17256,7 @@ export namespace Prisma {
     submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    score?: NullableIntFieldUpdateOperationsInput | number | null
+    score?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     feedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17255,7 +17270,7 @@ export namespace Prisma {
     submittedAt?: Date | string | null
     content?: string | null
     attachmentUrl?: string | null
-    score?: number | null
+    score?: Decimal | DecimalJsLike | number | string | null
     feedback?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17267,7 +17282,7 @@ export namespace Prisma {
     submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    score?: NullableIntFieldUpdateOperationsInput | number | null
+    score?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     feedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17281,7 +17296,7 @@ export namespace Prisma {
     submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    score?: NullableIntFieldUpdateOperationsInput | number | null
+    score?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     feedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18055,6 +18070,11 @@ export namespace Prisma {
     _max?: NestedEnumEnrollmentStatusFilter<$PrismaModel>
   }
 
+  export type AssignmentCourseOfferingIdTitleCompoundUniqueInput = {
+    courseOfferingId: string
+    title: string
+  }
+
   export type AssignmentCountOrderByAggregateInput = {
     id?: SortOrder
     courseOfferingId?: SortOrder
@@ -18107,6 +18127,17 @@ export namespace Prisma {
     in?: $Enums.SubmissionStatus[] | ListEnumSubmissionStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.SubmissionStatus[] | ListEnumSubmissionStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumSubmissionStatusFilter<$PrismaModel> | $Enums.SubmissionStatus
+  }
+
+  export type DecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
   }
 
   export type AssignmentScalarRelationFilter = {
@@ -18177,6 +18208,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumSubmissionStatusFilter<$PrismaModel>
     _max?: NestedEnumSubmissionStatusFilter<$PrismaModel>
+  }
+
+  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
   export type ProfileRoleCreateNestedManyWithoutRoleInput = {
@@ -18925,15 +18972,15 @@ export namespace Prisma {
     update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutEnrollmentsInput, ProfileUpdateWithoutEnrollmentsInput>, ProfileUncheckedUpdateWithoutEnrollmentsInput>
   }
 
-  export type CourseOfferingCreateNestedOneWithoutAssignmentInput = {
-    create?: XOR<CourseOfferingCreateWithoutAssignmentInput, CourseOfferingUncheckedCreateWithoutAssignmentInput>
-    connectOrCreate?: CourseOfferingCreateOrConnectWithoutAssignmentInput
+  export type CourseOfferingCreateNestedOneWithoutAssignmentsInput = {
+    create?: XOR<CourseOfferingCreateWithoutAssignmentsInput, CourseOfferingUncheckedCreateWithoutAssignmentsInput>
+    connectOrCreate?: CourseOfferingCreateOrConnectWithoutAssignmentsInput
     connect?: CourseOfferingWhereUniqueInput
   }
 
-  export type ProfileCreateNestedOneWithoutAssignmentInput = {
-    create?: XOR<ProfileCreateWithoutAssignmentInput, ProfileUncheckedCreateWithoutAssignmentInput>
-    connectOrCreate?: ProfileCreateOrConnectWithoutAssignmentInput
+  export type ProfileCreateNestedOneWithoutCreatedAssignmentsInput = {
+    create?: XOR<ProfileCreateWithoutCreatedAssignmentsInput, ProfileUncheckedCreateWithoutCreatedAssignmentsInput>
+    connectOrCreate?: ProfileCreateOrConnectWithoutCreatedAssignmentsInput
     connect?: ProfileWhereUniqueInput
   }
 
@@ -18951,22 +18998,22 @@ export namespace Prisma {
     connect?: SubmissionWhereUniqueInput | SubmissionWhereUniqueInput[]
   }
 
-  export type CourseOfferingUpdateOneRequiredWithoutAssignmentNestedInput = {
-    create?: XOR<CourseOfferingCreateWithoutAssignmentInput, CourseOfferingUncheckedCreateWithoutAssignmentInput>
-    connectOrCreate?: CourseOfferingCreateOrConnectWithoutAssignmentInput
-    upsert?: CourseOfferingUpsertWithoutAssignmentInput
+  export type CourseOfferingUpdateOneRequiredWithoutAssignmentsNestedInput = {
+    create?: XOR<CourseOfferingCreateWithoutAssignmentsInput, CourseOfferingUncheckedCreateWithoutAssignmentsInput>
+    connectOrCreate?: CourseOfferingCreateOrConnectWithoutAssignmentsInput
+    upsert?: CourseOfferingUpsertWithoutAssignmentsInput
     connect?: CourseOfferingWhereUniqueInput
-    update?: XOR<XOR<CourseOfferingUpdateToOneWithWhereWithoutAssignmentInput, CourseOfferingUpdateWithoutAssignmentInput>, CourseOfferingUncheckedUpdateWithoutAssignmentInput>
+    update?: XOR<XOR<CourseOfferingUpdateToOneWithWhereWithoutAssignmentsInput, CourseOfferingUpdateWithoutAssignmentsInput>, CourseOfferingUncheckedUpdateWithoutAssignmentsInput>
   }
 
-  export type ProfileUpdateOneWithoutAssignmentNestedInput = {
-    create?: XOR<ProfileCreateWithoutAssignmentInput, ProfileUncheckedCreateWithoutAssignmentInput>
-    connectOrCreate?: ProfileCreateOrConnectWithoutAssignmentInput
-    upsert?: ProfileUpsertWithoutAssignmentInput
+  export type ProfileUpdateOneWithoutCreatedAssignmentsNestedInput = {
+    create?: XOR<ProfileCreateWithoutCreatedAssignmentsInput, ProfileUncheckedCreateWithoutCreatedAssignmentsInput>
+    connectOrCreate?: ProfileCreateOrConnectWithoutCreatedAssignmentsInput
+    upsert?: ProfileUpsertWithoutCreatedAssignmentsInput
     disconnect?: ProfileWhereInput | boolean
     delete?: ProfileWhereInput | boolean
     connect?: ProfileWhereUniqueInput
-    update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutAssignmentInput, ProfileUpdateWithoutAssignmentInput>, ProfileUncheckedUpdateWithoutAssignmentInput>
+    update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutCreatedAssignmentsInput, ProfileUpdateWithoutCreatedAssignmentsInput>, ProfileUncheckedUpdateWithoutCreatedAssignmentsInput>
   }
 
   export type SubmissionUpdateManyWithoutAssignmentNestedInput = {
@@ -19003,14 +19050,22 @@ export namespace Prisma {
     connect?: AssignmentWhereUniqueInput
   }
 
-  export type ProfileCreateNestedOneWithoutSubmissionInput = {
-    create?: XOR<ProfileCreateWithoutSubmissionInput, ProfileUncheckedCreateWithoutSubmissionInput>
-    connectOrCreate?: ProfileCreateOrConnectWithoutSubmissionInput
+  export type ProfileCreateNestedOneWithoutSubmissionsInput = {
+    create?: XOR<ProfileCreateWithoutSubmissionsInput, ProfileUncheckedCreateWithoutSubmissionsInput>
+    connectOrCreate?: ProfileCreateOrConnectWithoutSubmissionsInput
     connect?: ProfileWhereUniqueInput
   }
 
   export type EnumSubmissionStatusFieldUpdateOperationsInput = {
     set?: $Enums.SubmissionStatus
+  }
+
+  export type NullableDecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string | null
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
   }
 
   export type AssignmentUpdateOneRequiredWithoutSubmissionsNestedInput = {
@@ -19021,12 +19076,12 @@ export namespace Prisma {
     update?: XOR<XOR<AssignmentUpdateToOneWithWhereWithoutSubmissionsInput, AssignmentUpdateWithoutSubmissionsInput>, AssignmentUncheckedUpdateWithoutSubmissionsInput>
   }
 
-  export type ProfileUpdateOneRequiredWithoutSubmissionNestedInput = {
-    create?: XOR<ProfileCreateWithoutSubmissionInput, ProfileUncheckedCreateWithoutSubmissionInput>
-    connectOrCreate?: ProfileCreateOrConnectWithoutSubmissionInput
-    upsert?: ProfileUpsertWithoutSubmissionInput
+  export type ProfileUpdateOneRequiredWithoutSubmissionsNestedInput = {
+    create?: XOR<ProfileCreateWithoutSubmissionsInput, ProfileUncheckedCreateWithoutSubmissionsInput>
+    connectOrCreate?: ProfileCreateOrConnectWithoutSubmissionsInput
+    upsert?: ProfileUpsertWithoutSubmissionsInput
     connect?: ProfileWhereUniqueInput
-    update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutSubmissionInput, ProfileUpdateWithoutSubmissionInput>, ProfileUncheckedUpdateWithoutSubmissionInput>
+    update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutSubmissionsInput, ProfileUpdateWithoutSubmissionsInput>, ProfileUncheckedUpdateWithoutSubmissionsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -19322,6 +19377,17 @@ export namespace Prisma {
     not?: NestedEnumSubmissionStatusFilter<$PrismaModel> | $Enums.SubmissionStatus
   }
 
+  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
   export type NestedEnumSubmissionStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.SubmissionStatus | EnumSubmissionStatusFieldRefInput<$PrismaModel>
     in?: $Enums.SubmissionStatus[] | ListEnumSubmissionStatusFieldRefInput<$PrismaModel>
@@ -19330,6 +19396,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumSubmissionStatusFilter<$PrismaModel>
     _max?: NestedEnumSubmissionStatusFilter<$PrismaModel>
+  }
+
+  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
   export type ProfileRoleCreateWithoutRoleInput = {
@@ -19522,7 +19604,7 @@ export namespace Prisma {
     isPublished?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    courseOffering: CourseOfferingCreateNestedOneWithoutAssignmentInput
+    courseOffering: CourseOfferingCreateNestedOneWithoutAssignmentsInput
     submissions?: SubmissionCreateNestedManyWithoutAssignmentInput
   }
 
@@ -19555,7 +19637,7 @@ export namespace Prisma {
     submittedAt?: Date | string | null
     content?: string | null
     attachmentUrl?: string | null
-    score?: number | null
+    score?: Decimal | DecimalJsLike | number | string | null
     feedback?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -19569,7 +19651,7 @@ export namespace Prisma {
     submittedAt?: Date | string | null
     content?: string | null
     attachmentUrl?: string | null
-    score?: number | null
+    score?: Decimal | DecimalJsLike | number | string | null
     feedback?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -19752,7 +19834,7 @@ export namespace Prisma {
     submittedAt?: DateTimeNullableFilter<"Submission"> | Date | string | null
     content?: StringNullableFilter<"Submission"> | string | null
     attachmentUrl?: StringNullableFilter<"Submission"> | string | null
-    score?: IntNullableFilter<"Submission"> | number | null
+    score?: DecimalNullableFilter<"Submission"> | Decimal | DecimalJsLike | number | string | null
     feedback?: StringNullableFilter<"Submission"> | string | null
     createdAt?: DateTimeFilter<"Submission"> | Date | string
     updatedAt?: DateTimeFilter<"Submission"> | Date | string
@@ -19778,8 +19860,8 @@ export namespace Prisma {
     createdCourses?: CourseCreateNestedManyWithoutCreatedByInput
     teachingAssignments?: TeachingAssignmentCreateNestedManyWithoutInstructorProfileInput
     enrollments?: EnrollmentCreateNestedManyWithoutStudentProfileInput
-    Assignment?: AssignmentCreateNestedManyWithoutCreatedByInput
-    Submission?: SubmissionCreateNestedManyWithoutStudentProfileInput
+    createdAssignments?: AssignmentCreateNestedManyWithoutCreatedByInput
+    submissions?: SubmissionCreateNestedManyWithoutStudentProfileInput
   }
 
   export type ProfileUncheckedCreateWithoutProfileRolesInput = {
@@ -19802,8 +19884,8 @@ export namespace Prisma {
     createdCourses?: CourseUncheckedCreateNestedManyWithoutCreatedByInput
     teachingAssignments?: TeachingAssignmentUncheckedCreateNestedManyWithoutInstructorProfileInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutStudentProfileInput
-    Assignment?: AssignmentUncheckedCreateNestedManyWithoutCreatedByInput
-    Submission?: SubmissionUncheckedCreateNestedManyWithoutStudentProfileInput
+    createdAssignments?: AssignmentUncheckedCreateNestedManyWithoutCreatedByInput
+    submissions?: SubmissionUncheckedCreateNestedManyWithoutStudentProfileInput
   }
 
   export type ProfileCreateOrConnectWithoutProfileRolesInput = {
@@ -19867,8 +19949,8 @@ export namespace Prisma {
     createdCourses?: CourseUpdateManyWithoutCreatedByNestedInput
     teachingAssignments?: TeachingAssignmentUpdateManyWithoutInstructorProfileNestedInput
     enrollments?: EnrollmentUpdateManyWithoutStudentProfileNestedInput
-    Assignment?: AssignmentUpdateManyWithoutCreatedByNestedInput
-    Submission?: SubmissionUpdateManyWithoutStudentProfileNestedInput
+    createdAssignments?: AssignmentUpdateManyWithoutCreatedByNestedInput
+    submissions?: SubmissionUpdateManyWithoutStudentProfileNestedInput
   }
 
   export type ProfileUncheckedUpdateWithoutProfileRolesInput = {
@@ -19891,8 +19973,8 @@ export namespace Prisma {
     createdCourses?: CourseUncheckedUpdateManyWithoutCreatedByNestedInput
     teachingAssignments?: TeachingAssignmentUncheckedUpdateManyWithoutInstructorProfileNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutStudentProfileNestedInput
-    Assignment?: AssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
-    Submission?: SubmissionUncheckedUpdateManyWithoutStudentProfileNestedInput
+    createdAssignments?: AssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
+    submissions?: SubmissionUncheckedUpdateManyWithoutStudentProfileNestedInput
   }
 
   export type RoleUpsertWithoutProfileRolesInput = {
@@ -19993,7 +20075,7 @@ export namespace Prisma {
     course: CourseCreateNestedOneWithoutCourseOfferingsInput
     teachingAssignments?: TeachingAssignmentCreateNestedManyWithoutCourseOfferingInput
     enrollments?: EnrollmentCreateNestedManyWithoutCourseOfferingInput
-    Assignment?: AssignmentCreateNestedManyWithoutCourseOfferingInput
+    assignments?: AssignmentCreateNestedManyWithoutCourseOfferingInput
   }
 
   export type CourseOfferingUncheckedCreateWithoutTermInput = {
@@ -20009,7 +20091,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     teachingAssignments?: TeachingAssignmentUncheckedCreateNestedManyWithoutCourseOfferingInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseOfferingInput
-    Assignment?: AssignmentUncheckedCreateNestedManyWithoutCourseOfferingInput
+    assignments?: AssignmentUncheckedCreateNestedManyWithoutCourseOfferingInput
   }
 
   export type CourseOfferingCreateOrConnectWithoutTermInput = {
@@ -20098,8 +20180,8 @@ export namespace Prisma {
     profileRoles?: ProfileRoleCreateNestedManyWithoutProfileInput
     teachingAssignments?: TeachingAssignmentCreateNestedManyWithoutInstructorProfileInput
     enrollments?: EnrollmentCreateNestedManyWithoutStudentProfileInput
-    Assignment?: AssignmentCreateNestedManyWithoutCreatedByInput
-    Submission?: SubmissionCreateNestedManyWithoutStudentProfileInput
+    createdAssignments?: AssignmentCreateNestedManyWithoutCreatedByInput
+    submissions?: SubmissionCreateNestedManyWithoutStudentProfileInput
   }
 
   export type ProfileUncheckedCreateWithoutCreatedCoursesInput = {
@@ -20122,8 +20204,8 @@ export namespace Prisma {
     profileRoles?: ProfileRoleUncheckedCreateNestedManyWithoutProfileInput
     teachingAssignments?: TeachingAssignmentUncheckedCreateNestedManyWithoutInstructorProfileInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutStudentProfileInput
-    Assignment?: AssignmentUncheckedCreateNestedManyWithoutCreatedByInput
-    Submission?: SubmissionUncheckedCreateNestedManyWithoutStudentProfileInput
+    createdAssignments?: AssignmentUncheckedCreateNestedManyWithoutCreatedByInput
+    submissions?: SubmissionUncheckedCreateNestedManyWithoutStudentProfileInput
   }
 
   export type ProfileCreateOrConnectWithoutCreatedCoursesInput = {
@@ -20144,7 +20226,7 @@ export namespace Prisma {
     term: TermCreateNestedOneWithoutCourseOfferingsInput
     teachingAssignments?: TeachingAssignmentCreateNestedManyWithoutCourseOfferingInput
     enrollments?: EnrollmentCreateNestedManyWithoutCourseOfferingInput
-    Assignment?: AssignmentCreateNestedManyWithoutCourseOfferingInput
+    assignments?: AssignmentCreateNestedManyWithoutCourseOfferingInput
   }
 
   export type CourseOfferingUncheckedCreateWithoutCourseInput = {
@@ -20160,7 +20242,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     teachingAssignments?: TeachingAssignmentUncheckedCreateNestedManyWithoutCourseOfferingInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseOfferingInput
-    Assignment?: AssignmentUncheckedCreateNestedManyWithoutCourseOfferingInput
+    assignments?: AssignmentUncheckedCreateNestedManyWithoutCourseOfferingInput
   }
 
   export type CourseOfferingCreateOrConnectWithoutCourseInput = {
@@ -20233,8 +20315,8 @@ export namespace Prisma {
     profileRoles?: ProfileRoleUpdateManyWithoutProfileNestedInput
     teachingAssignments?: TeachingAssignmentUpdateManyWithoutInstructorProfileNestedInput
     enrollments?: EnrollmentUpdateManyWithoutStudentProfileNestedInput
-    Assignment?: AssignmentUpdateManyWithoutCreatedByNestedInput
-    Submission?: SubmissionUpdateManyWithoutStudentProfileNestedInput
+    createdAssignments?: AssignmentUpdateManyWithoutCreatedByNestedInput
+    submissions?: SubmissionUpdateManyWithoutStudentProfileNestedInput
   }
 
   export type ProfileUncheckedUpdateWithoutCreatedCoursesInput = {
@@ -20257,8 +20339,8 @@ export namespace Prisma {
     profileRoles?: ProfileRoleUncheckedUpdateManyWithoutProfileNestedInput
     teachingAssignments?: TeachingAssignmentUncheckedUpdateManyWithoutInstructorProfileNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutStudentProfileNestedInput
-    Assignment?: AssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
-    Submission?: SubmissionUncheckedUpdateManyWithoutStudentProfileNestedInput
+    createdAssignments?: AssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
+    submissions?: SubmissionUncheckedUpdateManyWithoutStudentProfileNestedInput
   }
 
   export type CourseOfferingUpsertWithWhereUniqueWithoutCourseInput = {
@@ -20406,7 +20488,7 @@ export namespace Prisma {
     isPublished?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    createdBy?: ProfileCreateNestedOneWithoutAssignmentInput
+    createdBy?: ProfileCreateNestedOneWithoutCreatedAssignmentsInput
     submissions?: SubmissionCreateNestedManyWithoutAssignmentInput
   }
 
@@ -20568,7 +20650,7 @@ export namespace Prisma {
     course: CourseCreateNestedOneWithoutCourseOfferingsInput
     term: TermCreateNestedOneWithoutCourseOfferingsInput
     enrollments?: EnrollmentCreateNestedManyWithoutCourseOfferingInput
-    Assignment?: AssignmentCreateNestedManyWithoutCourseOfferingInput
+    assignments?: AssignmentCreateNestedManyWithoutCourseOfferingInput
   }
 
   export type CourseOfferingUncheckedCreateWithoutTeachingAssignmentsInput = {
@@ -20584,7 +20666,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseOfferingInput
-    Assignment?: AssignmentUncheckedCreateNestedManyWithoutCourseOfferingInput
+    assignments?: AssignmentUncheckedCreateNestedManyWithoutCourseOfferingInput
   }
 
   export type CourseOfferingCreateOrConnectWithoutTeachingAssignmentsInput = {
@@ -20612,8 +20694,8 @@ export namespace Prisma {
     profileRoles?: ProfileRoleCreateNestedManyWithoutProfileInput
     createdCourses?: CourseCreateNestedManyWithoutCreatedByInput
     enrollments?: EnrollmentCreateNestedManyWithoutStudentProfileInput
-    Assignment?: AssignmentCreateNestedManyWithoutCreatedByInput
-    Submission?: SubmissionCreateNestedManyWithoutStudentProfileInput
+    createdAssignments?: AssignmentCreateNestedManyWithoutCreatedByInput
+    submissions?: SubmissionCreateNestedManyWithoutStudentProfileInput
   }
 
   export type ProfileUncheckedCreateWithoutTeachingAssignmentsInput = {
@@ -20636,8 +20718,8 @@ export namespace Prisma {
     profileRoles?: ProfileRoleUncheckedCreateNestedManyWithoutProfileInput
     createdCourses?: CourseUncheckedCreateNestedManyWithoutCreatedByInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutStudentProfileInput
-    Assignment?: AssignmentUncheckedCreateNestedManyWithoutCreatedByInput
-    Submission?: SubmissionUncheckedCreateNestedManyWithoutStudentProfileInput
+    createdAssignments?: AssignmentUncheckedCreateNestedManyWithoutCreatedByInput
+    submissions?: SubmissionUncheckedCreateNestedManyWithoutStudentProfileInput
   }
 
   export type ProfileCreateOrConnectWithoutTeachingAssignmentsInput = {
@@ -20669,7 +20751,7 @@ export namespace Prisma {
     course?: CourseUpdateOneRequiredWithoutCourseOfferingsNestedInput
     term?: TermUpdateOneRequiredWithoutCourseOfferingsNestedInput
     enrollments?: EnrollmentUpdateManyWithoutCourseOfferingNestedInput
-    Assignment?: AssignmentUpdateManyWithoutCourseOfferingNestedInput
+    assignments?: AssignmentUpdateManyWithoutCourseOfferingNestedInput
   }
 
   export type CourseOfferingUncheckedUpdateWithoutTeachingAssignmentsInput = {
@@ -20685,7 +20767,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
-    Assignment?: AssignmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
+    assignments?: AssignmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
   }
 
   export type ProfileUpsertWithoutTeachingAssignmentsInput = {
@@ -20719,8 +20801,8 @@ export namespace Prisma {
     profileRoles?: ProfileRoleUpdateManyWithoutProfileNestedInput
     createdCourses?: CourseUpdateManyWithoutCreatedByNestedInput
     enrollments?: EnrollmentUpdateManyWithoutStudentProfileNestedInput
-    Assignment?: AssignmentUpdateManyWithoutCreatedByNestedInput
-    Submission?: SubmissionUpdateManyWithoutStudentProfileNestedInput
+    createdAssignments?: AssignmentUpdateManyWithoutCreatedByNestedInput
+    submissions?: SubmissionUpdateManyWithoutStudentProfileNestedInput
   }
 
   export type ProfileUncheckedUpdateWithoutTeachingAssignmentsInput = {
@@ -20743,8 +20825,8 @@ export namespace Prisma {
     profileRoles?: ProfileRoleUncheckedUpdateManyWithoutProfileNestedInput
     createdCourses?: CourseUncheckedUpdateManyWithoutCreatedByNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutStudentProfileNestedInput
-    Assignment?: AssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
-    Submission?: SubmissionUncheckedUpdateManyWithoutStudentProfileNestedInput
+    createdAssignments?: AssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
+    submissions?: SubmissionUncheckedUpdateManyWithoutStudentProfileNestedInput
   }
 
   export type CourseOfferingCreateWithoutEnrollmentsInput = {
@@ -20760,7 +20842,7 @@ export namespace Prisma {
     course: CourseCreateNestedOneWithoutCourseOfferingsInput
     term: TermCreateNestedOneWithoutCourseOfferingsInput
     teachingAssignments?: TeachingAssignmentCreateNestedManyWithoutCourseOfferingInput
-    Assignment?: AssignmentCreateNestedManyWithoutCourseOfferingInput
+    assignments?: AssignmentCreateNestedManyWithoutCourseOfferingInput
   }
 
   export type CourseOfferingUncheckedCreateWithoutEnrollmentsInput = {
@@ -20776,7 +20858,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     teachingAssignments?: TeachingAssignmentUncheckedCreateNestedManyWithoutCourseOfferingInput
-    Assignment?: AssignmentUncheckedCreateNestedManyWithoutCourseOfferingInput
+    assignments?: AssignmentUncheckedCreateNestedManyWithoutCourseOfferingInput
   }
 
   export type CourseOfferingCreateOrConnectWithoutEnrollmentsInput = {
@@ -20804,8 +20886,8 @@ export namespace Prisma {
     profileRoles?: ProfileRoleCreateNestedManyWithoutProfileInput
     createdCourses?: CourseCreateNestedManyWithoutCreatedByInput
     teachingAssignments?: TeachingAssignmentCreateNestedManyWithoutInstructorProfileInput
-    Assignment?: AssignmentCreateNestedManyWithoutCreatedByInput
-    Submission?: SubmissionCreateNestedManyWithoutStudentProfileInput
+    createdAssignments?: AssignmentCreateNestedManyWithoutCreatedByInput
+    submissions?: SubmissionCreateNestedManyWithoutStudentProfileInput
   }
 
   export type ProfileUncheckedCreateWithoutEnrollmentsInput = {
@@ -20828,8 +20910,8 @@ export namespace Prisma {
     profileRoles?: ProfileRoleUncheckedCreateNestedManyWithoutProfileInput
     createdCourses?: CourseUncheckedCreateNestedManyWithoutCreatedByInput
     teachingAssignments?: TeachingAssignmentUncheckedCreateNestedManyWithoutInstructorProfileInput
-    Assignment?: AssignmentUncheckedCreateNestedManyWithoutCreatedByInput
-    Submission?: SubmissionUncheckedCreateNestedManyWithoutStudentProfileInput
+    createdAssignments?: AssignmentUncheckedCreateNestedManyWithoutCreatedByInput
+    submissions?: SubmissionUncheckedCreateNestedManyWithoutStudentProfileInput
   }
 
   export type ProfileCreateOrConnectWithoutEnrollmentsInput = {
@@ -20861,7 +20943,7 @@ export namespace Prisma {
     course?: CourseUpdateOneRequiredWithoutCourseOfferingsNestedInput
     term?: TermUpdateOneRequiredWithoutCourseOfferingsNestedInput
     teachingAssignments?: TeachingAssignmentUpdateManyWithoutCourseOfferingNestedInput
-    Assignment?: AssignmentUpdateManyWithoutCourseOfferingNestedInput
+    assignments?: AssignmentUpdateManyWithoutCourseOfferingNestedInput
   }
 
   export type CourseOfferingUncheckedUpdateWithoutEnrollmentsInput = {
@@ -20877,7 +20959,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teachingAssignments?: TeachingAssignmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
-    Assignment?: AssignmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
+    assignments?: AssignmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
   }
 
   export type ProfileUpsertWithoutEnrollmentsInput = {
@@ -20911,8 +20993,8 @@ export namespace Prisma {
     profileRoles?: ProfileRoleUpdateManyWithoutProfileNestedInput
     createdCourses?: CourseUpdateManyWithoutCreatedByNestedInput
     teachingAssignments?: TeachingAssignmentUpdateManyWithoutInstructorProfileNestedInput
-    Assignment?: AssignmentUpdateManyWithoutCreatedByNestedInput
-    Submission?: SubmissionUpdateManyWithoutStudentProfileNestedInput
+    createdAssignments?: AssignmentUpdateManyWithoutCreatedByNestedInput
+    submissions?: SubmissionUpdateManyWithoutStudentProfileNestedInput
   }
 
   export type ProfileUncheckedUpdateWithoutEnrollmentsInput = {
@@ -20935,11 +21017,11 @@ export namespace Prisma {
     profileRoles?: ProfileRoleUncheckedUpdateManyWithoutProfileNestedInput
     createdCourses?: CourseUncheckedUpdateManyWithoutCreatedByNestedInput
     teachingAssignments?: TeachingAssignmentUncheckedUpdateManyWithoutInstructorProfileNestedInput
-    Assignment?: AssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
-    Submission?: SubmissionUncheckedUpdateManyWithoutStudentProfileNestedInput
+    createdAssignments?: AssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
+    submissions?: SubmissionUncheckedUpdateManyWithoutStudentProfileNestedInput
   }
 
-  export type CourseOfferingCreateWithoutAssignmentInput = {
+  export type CourseOfferingCreateWithoutAssignmentsInput = {
     id?: string
     orgId: string
     sectionCode: string
@@ -20955,7 +21037,7 @@ export namespace Prisma {
     enrollments?: EnrollmentCreateNestedManyWithoutCourseOfferingInput
   }
 
-  export type CourseOfferingUncheckedCreateWithoutAssignmentInput = {
+  export type CourseOfferingUncheckedCreateWithoutAssignmentsInput = {
     id?: string
     orgId: string
     courseId: string
@@ -20971,12 +21053,12 @@ export namespace Prisma {
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseOfferingInput
   }
 
-  export type CourseOfferingCreateOrConnectWithoutAssignmentInput = {
+  export type CourseOfferingCreateOrConnectWithoutAssignmentsInput = {
     where: CourseOfferingWhereUniqueInput
-    create: XOR<CourseOfferingCreateWithoutAssignmentInput, CourseOfferingUncheckedCreateWithoutAssignmentInput>
+    create: XOR<CourseOfferingCreateWithoutAssignmentsInput, CourseOfferingUncheckedCreateWithoutAssignmentsInput>
   }
 
-  export type ProfileCreateWithoutAssignmentInput = {
+  export type ProfileCreateWithoutCreatedAssignmentsInput = {
     id?: string
     orgId?: string | null
     email: string
@@ -20997,10 +21079,10 @@ export namespace Prisma {
     createdCourses?: CourseCreateNestedManyWithoutCreatedByInput
     teachingAssignments?: TeachingAssignmentCreateNestedManyWithoutInstructorProfileInput
     enrollments?: EnrollmentCreateNestedManyWithoutStudentProfileInput
-    Submission?: SubmissionCreateNestedManyWithoutStudentProfileInput
+    submissions?: SubmissionCreateNestedManyWithoutStudentProfileInput
   }
 
-  export type ProfileUncheckedCreateWithoutAssignmentInput = {
+  export type ProfileUncheckedCreateWithoutCreatedAssignmentsInput = {
     id?: string
     orgId?: string | null
     email: string
@@ -21021,12 +21103,12 @@ export namespace Prisma {
     createdCourses?: CourseUncheckedCreateNestedManyWithoutCreatedByInput
     teachingAssignments?: TeachingAssignmentUncheckedCreateNestedManyWithoutInstructorProfileInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutStudentProfileInput
-    Submission?: SubmissionUncheckedCreateNestedManyWithoutStudentProfileInput
+    submissions?: SubmissionUncheckedCreateNestedManyWithoutStudentProfileInput
   }
 
-  export type ProfileCreateOrConnectWithoutAssignmentInput = {
+  export type ProfileCreateOrConnectWithoutCreatedAssignmentsInput = {
     where: ProfileWhereUniqueInput
-    create: XOR<ProfileCreateWithoutAssignmentInput, ProfileUncheckedCreateWithoutAssignmentInput>
+    create: XOR<ProfileCreateWithoutCreatedAssignmentsInput, ProfileUncheckedCreateWithoutCreatedAssignmentsInput>
   }
 
   export type SubmissionCreateWithoutAssignmentInput = {
@@ -21035,11 +21117,11 @@ export namespace Prisma {
     submittedAt?: Date | string | null
     content?: string | null
     attachmentUrl?: string | null
-    score?: number | null
+    score?: Decimal | DecimalJsLike | number | string | null
     feedback?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    studentProfile: ProfileCreateNestedOneWithoutSubmissionInput
+    studentProfile: ProfileCreateNestedOneWithoutSubmissionsInput
   }
 
   export type SubmissionUncheckedCreateWithoutAssignmentInput = {
@@ -21049,7 +21131,7 @@ export namespace Prisma {
     submittedAt?: Date | string | null
     content?: string | null
     attachmentUrl?: string | null
-    score?: number | null
+    score?: Decimal | DecimalJsLike | number | string | null
     feedback?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21065,18 +21147,18 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type CourseOfferingUpsertWithoutAssignmentInput = {
-    update: XOR<CourseOfferingUpdateWithoutAssignmentInput, CourseOfferingUncheckedUpdateWithoutAssignmentInput>
-    create: XOR<CourseOfferingCreateWithoutAssignmentInput, CourseOfferingUncheckedCreateWithoutAssignmentInput>
+  export type CourseOfferingUpsertWithoutAssignmentsInput = {
+    update: XOR<CourseOfferingUpdateWithoutAssignmentsInput, CourseOfferingUncheckedUpdateWithoutAssignmentsInput>
+    create: XOR<CourseOfferingCreateWithoutAssignmentsInput, CourseOfferingUncheckedCreateWithoutAssignmentsInput>
     where?: CourseOfferingWhereInput
   }
 
-  export type CourseOfferingUpdateToOneWithWhereWithoutAssignmentInput = {
+  export type CourseOfferingUpdateToOneWithWhereWithoutAssignmentsInput = {
     where?: CourseOfferingWhereInput
-    data: XOR<CourseOfferingUpdateWithoutAssignmentInput, CourseOfferingUncheckedUpdateWithoutAssignmentInput>
+    data: XOR<CourseOfferingUpdateWithoutAssignmentsInput, CourseOfferingUncheckedUpdateWithoutAssignmentsInput>
   }
 
-  export type CourseOfferingUpdateWithoutAssignmentInput = {
+  export type CourseOfferingUpdateWithoutAssignmentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     orgId?: StringFieldUpdateOperationsInput | string
     sectionCode?: StringFieldUpdateOperationsInput | string
@@ -21092,7 +21174,7 @@ export namespace Prisma {
     enrollments?: EnrollmentUpdateManyWithoutCourseOfferingNestedInput
   }
 
-  export type CourseOfferingUncheckedUpdateWithoutAssignmentInput = {
+  export type CourseOfferingUncheckedUpdateWithoutAssignmentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     orgId?: StringFieldUpdateOperationsInput | string
     courseId?: StringFieldUpdateOperationsInput | string
@@ -21108,18 +21190,18 @@ export namespace Prisma {
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
   }
 
-  export type ProfileUpsertWithoutAssignmentInput = {
-    update: XOR<ProfileUpdateWithoutAssignmentInput, ProfileUncheckedUpdateWithoutAssignmentInput>
-    create: XOR<ProfileCreateWithoutAssignmentInput, ProfileUncheckedCreateWithoutAssignmentInput>
+  export type ProfileUpsertWithoutCreatedAssignmentsInput = {
+    update: XOR<ProfileUpdateWithoutCreatedAssignmentsInput, ProfileUncheckedUpdateWithoutCreatedAssignmentsInput>
+    create: XOR<ProfileCreateWithoutCreatedAssignmentsInput, ProfileUncheckedCreateWithoutCreatedAssignmentsInput>
     where?: ProfileWhereInput
   }
 
-  export type ProfileUpdateToOneWithWhereWithoutAssignmentInput = {
+  export type ProfileUpdateToOneWithWhereWithoutCreatedAssignmentsInput = {
     where?: ProfileWhereInput
-    data: XOR<ProfileUpdateWithoutAssignmentInput, ProfileUncheckedUpdateWithoutAssignmentInput>
+    data: XOR<ProfileUpdateWithoutCreatedAssignmentsInput, ProfileUncheckedUpdateWithoutCreatedAssignmentsInput>
   }
 
-  export type ProfileUpdateWithoutAssignmentInput = {
+  export type ProfileUpdateWithoutCreatedAssignmentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     orgId?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -21140,10 +21222,10 @@ export namespace Prisma {
     createdCourses?: CourseUpdateManyWithoutCreatedByNestedInput
     teachingAssignments?: TeachingAssignmentUpdateManyWithoutInstructorProfileNestedInput
     enrollments?: EnrollmentUpdateManyWithoutStudentProfileNestedInput
-    Submission?: SubmissionUpdateManyWithoutStudentProfileNestedInput
+    submissions?: SubmissionUpdateManyWithoutStudentProfileNestedInput
   }
 
-  export type ProfileUncheckedUpdateWithoutAssignmentInput = {
+  export type ProfileUncheckedUpdateWithoutCreatedAssignmentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     orgId?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -21164,7 +21246,7 @@ export namespace Prisma {
     createdCourses?: CourseUncheckedUpdateManyWithoutCreatedByNestedInput
     teachingAssignments?: TeachingAssignmentUncheckedUpdateManyWithoutInstructorProfileNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutStudentProfileNestedInput
-    Submission?: SubmissionUncheckedUpdateManyWithoutStudentProfileNestedInput
+    submissions?: SubmissionUncheckedUpdateManyWithoutStudentProfileNestedInput
   }
 
   export type SubmissionUpsertWithWhereUniqueWithoutAssignmentInput = {
@@ -21192,8 +21274,8 @@ export namespace Prisma {
     isPublished?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    courseOffering: CourseOfferingCreateNestedOneWithoutAssignmentInput
-    createdBy?: ProfileCreateNestedOneWithoutAssignmentInput
+    courseOffering: CourseOfferingCreateNestedOneWithoutAssignmentsInput
+    createdBy?: ProfileCreateNestedOneWithoutCreatedAssignmentsInput
   }
 
   export type AssignmentUncheckedCreateWithoutSubmissionsInput = {
@@ -21214,7 +21296,7 @@ export namespace Prisma {
     create: XOR<AssignmentCreateWithoutSubmissionsInput, AssignmentUncheckedCreateWithoutSubmissionsInput>
   }
 
-  export type ProfileCreateWithoutSubmissionInput = {
+  export type ProfileCreateWithoutSubmissionsInput = {
     id?: string
     orgId?: string | null
     email: string
@@ -21235,10 +21317,10 @@ export namespace Prisma {
     createdCourses?: CourseCreateNestedManyWithoutCreatedByInput
     teachingAssignments?: TeachingAssignmentCreateNestedManyWithoutInstructorProfileInput
     enrollments?: EnrollmentCreateNestedManyWithoutStudentProfileInput
-    Assignment?: AssignmentCreateNestedManyWithoutCreatedByInput
+    createdAssignments?: AssignmentCreateNestedManyWithoutCreatedByInput
   }
 
-  export type ProfileUncheckedCreateWithoutSubmissionInput = {
+  export type ProfileUncheckedCreateWithoutSubmissionsInput = {
     id?: string
     orgId?: string | null
     email: string
@@ -21259,12 +21341,12 @@ export namespace Prisma {
     createdCourses?: CourseUncheckedCreateNestedManyWithoutCreatedByInput
     teachingAssignments?: TeachingAssignmentUncheckedCreateNestedManyWithoutInstructorProfileInput
     enrollments?: EnrollmentUncheckedCreateNestedManyWithoutStudentProfileInput
-    Assignment?: AssignmentUncheckedCreateNestedManyWithoutCreatedByInput
+    createdAssignments?: AssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
-  export type ProfileCreateOrConnectWithoutSubmissionInput = {
+  export type ProfileCreateOrConnectWithoutSubmissionsInput = {
     where: ProfileWhereUniqueInput
-    create: XOR<ProfileCreateWithoutSubmissionInput, ProfileUncheckedCreateWithoutSubmissionInput>
+    create: XOR<ProfileCreateWithoutSubmissionsInput, ProfileUncheckedCreateWithoutSubmissionsInput>
   }
 
   export type AssignmentUpsertWithoutSubmissionsInput = {
@@ -21287,8 +21369,8 @@ export namespace Prisma {
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    courseOffering?: CourseOfferingUpdateOneRequiredWithoutAssignmentNestedInput
-    createdBy?: ProfileUpdateOneWithoutAssignmentNestedInput
+    courseOffering?: CourseOfferingUpdateOneRequiredWithoutAssignmentsNestedInput
+    createdBy?: ProfileUpdateOneWithoutCreatedAssignmentsNestedInput
   }
 
   export type AssignmentUncheckedUpdateWithoutSubmissionsInput = {
@@ -21304,18 +21386,18 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ProfileUpsertWithoutSubmissionInput = {
-    update: XOR<ProfileUpdateWithoutSubmissionInput, ProfileUncheckedUpdateWithoutSubmissionInput>
-    create: XOR<ProfileCreateWithoutSubmissionInput, ProfileUncheckedCreateWithoutSubmissionInput>
+  export type ProfileUpsertWithoutSubmissionsInput = {
+    update: XOR<ProfileUpdateWithoutSubmissionsInput, ProfileUncheckedUpdateWithoutSubmissionsInput>
+    create: XOR<ProfileCreateWithoutSubmissionsInput, ProfileUncheckedCreateWithoutSubmissionsInput>
     where?: ProfileWhereInput
   }
 
-  export type ProfileUpdateToOneWithWhereWithoutSubmissionInput = {
+  export type ProfileUpdateToOneWithWhereWithoutSubmissionsInput = {
     where?: ProfileWhereInput
-    data: XOR<ProfileUpdateWithoutSubmissionInput, ProfileUncheckedUpdateWithoutSubmissionInput>
+    data: XOR<ProfileUpdateWithoutSubmissionsInput, ProfileUncheckedUpdateWithoutSubmissionsInput>
   }
 
-  export type ProfileUpdateWithoutSubmissionInput = {
+  export type ProfileUpdateWithoutSubmissionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     orgId?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -21336,10 +21418,10 @@ export namespace Prisma {
     createdCourses?: CourseUpdateManyWithoutCreatedByNestedInput
     teachingAssignments?: TeachingAssignmentUpdateManyWithoutInstructorProfileNestedInput
     enrollments?: EnrollmentUpdateManyWithoutStudentProfileNestedInput
-    Assignment?: AssignmentUpdateManyWithoutCreatedByNestedInput
+    createdAssignments?: AssignmentUpdateManyWithoutCreatedByNestedInput
   }
 
-  export type ProfileUncheckedUpdateWithoutSubmissionInput = {
+  export type ProfileUncheckedUpdateWithoutSubmissionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     orgId?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -21360,7 +21442,7 @@ export namespace Prisma {
     createdCourses?: CourseUncheckedUpdateManyWithoutCreatedByNestedInput
     teachingAssignments?: TeachingAssignmentUncheckedUpdateManyWithoutInstructorProfileNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutStudentProfileNestedInput
-    Assignment?: AssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdAssignments?: AssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type ProfileRoleCreateManyRoleInput = {
@@ -21459,7 +21541,7 @@ export namespace Prisma {
     submittedAt?: Date | string | null
     content?: string | null
     attachmentUrl?: string | null
-    score?: number | null
+    score?: Decimal | DecimalJsLike | number | string | null
     feedback?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21599,7 +21681,7 @@ export namespace Prisma {
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    courseOffering?: CourseOfferingUpdateOneRequiredWithoutAssignmentNestedInput
+    courseOffering?: CourseOfferingUpdateOneRequiredWithoutAssignmentsNestedInput
     submissions?: SubmissionUpdateManyWithoutAssignmentNestedInput
   }
 
@@ -21634,7 +21716,7 @@ export namespace Prisma {
     submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    score?: NullableIntFieldUpdateOperationsInput | number | null
+    score?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     feedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21648,7 +21730,7 @@ export namespace Prisma {
     submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    score?: NullableIntFieldUpdateOperationsInput | number | null
+    score?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     feedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21661,7 +21743,7 @@ export namespace Prisma {
     submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    score?: NullableIntFieldUpdateOperationsInput | number | null
+    score?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     feedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21747,7 +21829,7 @@ export namespace Prisma {
     course?: CourseUpdateOneRequiredWithoutCourseOfferingsNestedInput
     teachingAssignments?: TeachingAssignmentUpdateManyWithoutCourseOfferingNestedInput
     enrollments?: EnrollmentUpdateManyWithoutCourseOfferingNestedInput
-    Assignment?: AssignmentUpdateManyWithoutCourseOfferingNestedInput
+    assignments?: AssignmentUpdateManyWithoutCourseOfferingNestedInput
   }
 
   export type CourseOfferingUncheckedUpdateWithoutTermInput = {
@@ -21763,7 +21845,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teachingAssignments?: TeachingAssignmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
-    Assignment?: AssignmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
+    assignments?: AssignmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
   }
 
   export type CourseOfferingUncheckedUpdateManyWithoutTermInput = {
@@ -21805,7 +21887,7 @@ export namespace Prisma {
     term?: TermUpdateOneRequiredWithoutCourseOfferingsNestedInput
     teachingAssignments?: TeachingAssignmentUpdateManyWithoutCourseOfferingNestedInput
     enrollments?: EnrollmentUpdateManyWithoutCourseOfferingNestedInput
-    Assignment?: AssignmentUpdateManyWithoutCourseOfferingNestedInput
+    assignments?: AssignmentUpdateManyWithoutCourseOfferingNestedInput
   }
 
   export type CourseOfferingUncheckedUpdateWithoutCourseInput = {
@@ -21821,7 +21903,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teachingAssignments?: TeachingAssignmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
-    Assignment?: AssignmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
+    assignments?: AssignmentUncheckedUpdateManyWithoutCourseOfferingNestedInput
   }
 
   export type CourseOfferingUncheckedUpdateManyWithoutCourseInput = {
@@ -21934,7 +22016,7 @@ export namespace Prisma {
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: ProfileUpdateOneWithoutAssignmentNestedInput
+    createdBy?: ProfileUpdateOneWithoutCreatedAssignmentsNestedInput
     submissions?: SubmissionUpdateManyWithoutAssignmentNestedInput
   }
 
@@ -21970,7 +22052,7 @@ export namespace Prisma {
     submittedAt?: Date | string | null
     content?: string | null
     attachmentUrl?: string | null
-    score?: number | null
+    score?: Decimal | DecimalJsLike | number | string | null
     feedback?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21982,11 +22064,11 @@ export namespace Prisma {
     submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    score?: NullableIntFieldUpdateOperationsInput | number | null
+    score?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     feedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    studentProfile?: ProfileUpdateOneRequiredWithoutSubmissionNestedInput
+    studentProfile?: ProfileUpdateOneRequiredWithoutSubmissionsNestedInput
   }
 
   export type SubmissionUncheckedUpdateWithoutAssignmentInput = {
@@ -21996,7 +22078,7 @@ export namespace Prisma {
     submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    score?: NullableIntFieldUpdateOperationsInput | number | null
+    score?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     feedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22009,7 +22091,7 @@ export namespace Prisma {
     submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
     attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    score?: NullableIntFieldUpdateOperationsInput | number | null
+    score?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     feedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

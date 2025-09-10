@@ -88,8 +88,8 @@ model Profile {
   createdCourses      Course[]
   teachingAssignments TeachingAssignment[]
   enrollments         Enrollment[]
-  Assignment          Assignment[]
-  Submission          Submission[]
+  createdAssignments  Assignment[]         @relation("AssignmentCreatedBy")
+  submissions         Submission[]         @relation("SubmissionByStudent")
 
   @@map("profiles")
 }
@@ -193,7 +193,7 @@ model CourseOffering {
   term                Term                 @relation(fields: [termId], references: [id], onDelete: Restrict)
   teachingAssignments TeachingAssignment[]
   enrollments         Enrollment[]
-  Assignment          Assignment[]
+  assignments         Assignment[]
 
   // Unique constraint per course, term, and section
   @@unique([courseId, termId, sectionCode])
@@ -252,7 +252,7 @@ model Assignment {
   id               String    @id @default(uuid())
   courseOfferingId String    @map("course_offering_id")
   title            String
-  description      String?
+  description      String?   @db.Text
   dueAt            DateTime? @map("due_at")
   points           Int       @default(100)
   isPublished      Boolean   @default(false) @map("is_published")
@@ -262,9 +262,12 @@ model Assignment {
 
   // Relations
   courseOffering CourseOffering @relation(fields: [courseOfferingId], references: [id], onDelete: Cascade)
-  createdBy      Profile?       @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  createdBy      Profile?       @relation("AssignmentCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
   submissions    Submission[]
 
+  @@unique([courseOfferingId, title], map: "assignments_offering_title_key")
+  @@index([courseOfferingId], map: "assignments_course_offering_id_idx")
+  @@index([createdAt], map: "assignments_created_at_idx")
   @@map("assignments")
 }
 
@@ -274,18 +277,21 @@ model Submission {
   studentProfileId String           @map("student_profile_id")
   status           SubmissionStatus @default(draft)
   submittedAt      DateTime?        @map("submitted_at")
-  content          String?
+  content          String?          @db.Text
   attachmentUrl    String?          @map("attachment_url")
-  score            Int?
-  feedback         String?
+  score            Decimal?         @db.Decimal(6, 2)
+  feedback         String?          @db.Text
   createdAt        DateTime         @default(now()) @map("created_at")
   updatedAt        DateTime         @updatedAt @map("updated_at")
 
   // Relations
   assignment     Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
-  studentProfile Profile    @relation(fields: [studentProfileId], references: [id], onDelete: Restrict)
+  studentProfile Profile    @relation("SubmissionByStudent", fields: [studentProfileId], references: [id], onDelete: Restrict)
 
   // A student can submit at most once per assignment (extensions/edits overwrite)
   @@unique([assignmentId, studentProfileId])
+  @@index([studentProfileId], map: "submissions_student_profile_id_idx")
+  @@index([assignmentId, submittedAt], map: "submissions_assignment_submitted_at_idx")
+  @@index([createdAt], map: "submissions_created_at_idx")
   @@map("submissions")
 }

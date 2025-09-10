@@ -17,11 +17,12 @@ async function verifyTables() {
     console.log(`✅ ProfileRoles table: ${profileRoles.length} records`);
 
     // Assignment domain checks
-    const assignments = await prisma.assignment.findMany();
-    console.log(`✅ Assignments table: ${assignments.length} records`);
-
-    const submissions = await prisma.submission.findMany();
-    console.log(`✅ Submissions table: ${submissions.length} records`);
+    console.log(
+      `✅ Assignments table: ${await prisma.assignment.count()} records`
+    );
+    console.log(
+      `✅ Submissions table: ${await prisma.submission.count()} records`
+    );
 
     console.log('\n🎉 All tables created successfully!');
     console.log('\n📋 Available tables:');
