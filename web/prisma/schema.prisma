@@ -48,6 +48,39 @@ enum TeachingRole {
   ta
 }
 
+enum ExamType {
+  quiz
+  midterm
+  final
+  assignment
+  project
+  presentation
+}
+
+enum ExamStatus {
+  draft
+  published
+  active
+  completed
+  archived
+}
+
+enum ResultStatus {
+  pending
+  graded
+  approved
+  disputed
+  final
+}
+
+enum TranscriptStatus {
+  draft
+  pending_approval
+  approved
+  official
+  archived
+}
+
 // Roles table
 model Role {
   id          String    @id @default(uuid())
@@ -84,12 +117,19 @@ model Profile {
   deletedAt           DateTime?  @map("deleted_at")
 
   // Relations
-  profileRoles        ProfileRole[]
-  createdCourses      Course[]
-  teachingAssignments TeachingAssignment[]
-  enrollments         Enrollment[]
-  createdAssignments  Assignment[]         @relation("AssignmentCreatedBy")
-  submissions         Submission[]         @relation("SubmissionByStudent")
+  profileRoles         ProfileRole[]
+  createdCourses       Course[]
+  teachingAssignments  TeachingAssignment[]
+  enrollments          Enrollment[]
+  createdAssignments   Assignment[]         @relation("AssignmentCreatedBy")
+  submissions          Submission[]         @relation("SubmissionByStudent")
+  createdExams         Exam[]               @relation("ExamCreatedBy")
+  examAttempts         ExamAttempt[]        @relation("ExamAttemptByStudent")
+  results              Result[]             @relation("ResultByStudent")
+  gradedResults        Result[]             @relation("ResultGradedBy")
+  transcripts          Transcript[]         @relation("TranscriptByStudent")
+  generatedTranscripts Transcript[]         @relation("TranscriptGeneratedBy")
+  approvedTranscripts  Transcript[]         @relation("TranscriptApprovedBy")
 
   @@map("profiles")
 }
@@ -144,6 +184,7 @@ model Term {
 
   // Relations
   courseOfferings CourseOffering[]
+  transcripts     Transcript[]
 
   // Unique constraint per org
   @@unique([orgId, code])
@@ -194,6 +235,9 @@ model CourseOffering {
   teachingAssignments TeachingAssignment[]
   enrollments         Enrollment[]
   assignments         Assignment[]
+  exams               Exam[]
+  results             Result[]
+  transcriptItems     TranscriptItem[]
 
   // Unique constraint per course, term, and section
   @@unique([courseId, termId, sectionCode])
@@ -264,6 +308,7 @@ model Assignment {
   courseOffering CourseOffering @relation(fields: [courseOfferingId], references: [id], onDelete: Cascade)
   createdBy      Profile?       @relation("AssignmentCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
   submissions    Submission[]
+  results        Result[]
 
   @@unique([courseOfferingId, title], map: "assignments_offering_title_key")
   @@index([courseOfferingId], map: "assignments_course_offering_id_idx")
@@ -287,6 +332,7 @@ model Submission {
   // Relations
   assignment     Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
   studentProfile Profile    @relation("SubmissionByStudent", fields: [studentProfileId], references: [id], onDelete: Restrict)
+  results        Result[]
 
   // A student can submit at most once per assignment (extensions/edits overwrite)
   @@unique([assignmentId, studentProfileId])
@@ -294,4 +340,175 @@ model Submission {
   @@index([assignmentId, submittedAt], map: "submissions_assignment_submitted_at_idx")
   @@index([createdAt], map: "submissions_created_at_idx")
   @@map("submissions")
+}
+
+// Exam domain
+
+model Exam {
+  id               String     @id @default(uuid())
+  courseOfferingId String     @map("course_offering_id")
+  title            String
+  description      String?    @db.Text
+  examType         ExamType   @map("exam_type")
+  status           ExamStatus @default(draft)
+  points           Int        @default(100)
+  timeLimitMinutes Int?       @map("time_limit_minutes")
+  maxAttempts      Int        @default(1) @map("max_attempts")
+  isProctored      Boolean    @default(false) @map("is_proctored")
+  instructions     String?    @db.Text
+  startAt          DateTime?  @map("start_at")
+  endAt            DateTime?  @map("end_at")
+  isPublished      Boolean    @default(false) @map("is_published")
+  createdById      String?    @map("created_by")
+  createdAt        DateTime   @default(now()) @map("created_at")
+  updatedAt        DateTime   @updatedAt @map("updated_at")
+
+  // Relations
+  courseOffering CourseOffering @relation(fields: [courseOfferingId], references: [id], onDelete: Cascade)
+  createdBy      Profile?       @relation("ExamCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  examAttempts   ExamAttempt[]
+  results        Result[]
+
+  @@unique([courseOfferingId, title], map: "exams_offering_title_key")
+  @@index([courseOfferingId], map: "exams_course_offering_id_idx")
+  @@index([examType], map: "exams_exam_type_idx")
+  @@index([status], map: "exams_status_idx")
+  @@index([createdAt], map: "exams_created_at_idx")
+  @@map("exams")
+}
+
+model ExamAttempt {
+  id               String    @id @default(uuid())
+  examId           String    @map("exam_id")
+  studentProfileId String    @map("student_profile_id")
+  attemptNumber    Int       @map("attempt_number")
+  startedAt        DateTime  @map("started_at")
+  submittedAt      DateTime? @map("submitted_at")
+  timeSpentMinutes Int?      @map("time_spent_minutes")
+  score            Decimal?  @db.Decimal(6, 2)
+  isCompleted      Boolean   @default(false) @map("is_completed")
+  answers          Json? // Store exam answers as JSON
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  exam           Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+  studentProfile Profile  @relation("ExamAttemptByStudent", fields: [studentProfileId], references: [id], onDelete: Restrict)
+  Result         Result[]
+
+  // A student can have multiple attempts per exam
+  @@unique([examId, studentProfileId, attemptNumber])
+  @@index([studentProfileId], map: "exam_attempts_student_profile_id_idx")
+  @@index([examId, startedAt], map: "exam_attempts_exam_started_at_idx")
+  @@index([createdAt], map: "exam_attempts_created_at_idx")
+  @@map("exam_attempts")
+}
+
+// Result domain
+
+model Result {
+  id               String       @id @default(uuid())
+  courseOfferingId String       @map("course_offering_id")
+  studentProfileId String       @map("student_profile_id")
+  examId           String?      @map("exam_id")
+  assignmentId     String?      @map("assignment_id")
+  examAttemptId    String?      @map("exam_attempt_id")
+  submissionId     String?      @map("submission_id")
+  resultType       ExamType     @map("result_type")
+  title            String
+  pointsEarned     Decimal      @map("points_earned") @db.Decimal(6, 2)
+  pointsPossible   Decimal      @map("points_possible") @db.Decimal(6, 2)
+  percentage       Decimal      @db.Decimal(5, 2)
+  letterGrade      String?      @map("letter_grade")
+  status           ResultStatus @default(pending)
+  gradedAt         DateTime?    @map("graded_at")
+  gradedById       String?      @map("graded_by")
+  feedback         String?      @db.Text
+  isCurved         Boolean      @default(false) @map("is_curved")
+  curveValue       Decimal?     @map("curve_value") @db.Decimal(5, 2)
+  createdAt        DateTime     @default(now()) @map("created_at")
+  updatedAt        DateTime     @updatedAt @map("updated_at")
+
+  // Relations
+  courseOffering CourseOffering @relation(fields: [courseOfferingId], references: [id], onDelete: Cascade)
+  studentProfile Profile        @relation("ResultByStudent", fields: [studentProfileId], references: [id], onDelete: Restrict)
+  exam           Exam?          @relation(fields: [examId], references: [id], onDelete: SetNull)
+  assignment     Assignment?    @relation(fields: [assignmentId], references: [id], onDelete: SetNull)
+  examAttempt    ExamAttempt?   @relation(fields: [examAttemptId], references: [id], onDelete: SetNull)
+  submission     Submission?    @relation(fields: [submissionId], references: [id], onDelete: SetNull)
+  gradedBy       Profile?       @relation("ResultGradedBy", fields: [gradedById], references: [id], onDelete: SetNull)
+
+  // Unique constraints per student per assessment type
+  @@unique([courseOfferingId, studentProfileId, examId], map: "results_course_student_exam_key")
+  @@unique([courseOfferingId, studentProfileId, assignmentId], map: "results_course_student_assignment_key")
+  @@index([studentProfileId], map: "results_student_profile_id_idx")
+  @@index([courseOfferingId], map: "results_course_offering_id_idx")
+  @@index([resultType], map: "results_result_type_idx")
+  @@index([status], map: "results_status_idx")
+  @@index([createdAt], map: "results_created_at_idx")
+  @@map("results")
+}
+
+// Transcript domain
+
+model Transcript {
+  id               String           @id @default(uuid())
+  studentProfileId String           @map("student_profile_id")
+  termId           String?          @map("term_id")
+  status           TranscriptStatus @default(draft)
+  gpa              Decimal?         @db.Decimal(3, 2)
+  totalCredits     Int              @default(0) @map("total_credits")
+  earnedCredits    Int              @default(0) @map("earned_credits")
+  isOfficial       Boolean          @default(false) @map("is_official")
+  generatedAt      DateTime?        @map("generated_at")
+  generatedById    String?          @map("generated_by")
+  approvedAt       DateTime?        @map("approved_at")
+  approvedById     String?          @map("approved_by")
+  notes            String?          @db.Text
+  createdAt        DateTime         @default(now()) @map("created_at")
+  updatedAt        DateTime         @updatedAt @map("updated_at")
+
+  // Relations
+  studentProfile  Profile          @relation("TranscriptByStudent", fields: [studentProfileId], references: [id], onDelete: Restrict)
+  term            Term?            @relation(fields: [termId], references: [id], onDelete: SetNull)
+  generatedBy     Profile?         @relation("TranscriptGeneratedBy", fields: [generatedById], references: [id], onDelete: SetNull)
+  approvedBy      Profile?         @relation("TranscriptApprovedBy", fields: [approvedById], references: [id], onDelete: SetNull)
+  transcriptItems TranscriptItem[]
+
+  @@index([studentProfileId], map: "transcripts_student_profile_id_idx")
+  @@index([termId], map: "transcripts_term_id_idx")
+  @@index([status], map: "transcripts_status_idx")
+  @@index([isOfficial], map: "transcripts_is_official_idx")
+  @@index([createdAt], map: "transcripts_created_at_idx")
+  @@map("transcripts")
+}
+
+model TranscriptItem {
+  id               String   @id @default(uuid())
+  transcriptId     String   @map("transcript_id")
+  courseOfferingId String   @map("course_offering_id")
+  courseCode       String   @map("course_code")
+  courseTitle      String   @map("course_title")
+  creditHours      Int      @map("credit_hours")
+  letterGrade      String?  @map("letter_grade")
+  pointsEarned     Decimal? @map("points_earned") @db.Decimal(6, 2)
+  pointsPossible   Decimal? @map("points_possible") @db.Decimal(6, 2)
+  percentage       Decimal? @db.Decimal(5, 2)
+  termCode         String   @map("term_code")
+  termName         String   @map("term_name")
+  year             Int
+  semester         String
+  isCompleted      Boolean  @default(false) @map("is_completed")
+  isPassed         Boolean  @default(false) @map("is_passed")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  transcript     Transcript     @relation(fields: [transcriptId], references: [id], onDelete: Cascade)
+  courseOffering CourseOffering @relation(fields: [courseOfferingId], references: [id], onDelete: Restrict)
+
+  @@index([transcriptId], map: "transcript_items_transcript_id_idx")
+  @@index([courseOfferingId], map: "transcript_items_course_offering_id_idx")
+  @@index([year, semester], map: "transcript_items_year_semester_idx")
+  @@map("transcript_items")
 }
