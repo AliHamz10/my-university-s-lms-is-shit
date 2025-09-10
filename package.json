@@ -1,43 +1,31 @@
 {
-  "name": "university-lms-mern",
+  "name": "university-lms",
   "version": "1.0.0",
-  "description": "A modern Learning Management System built with MERN stack",
-  "main": "index.js",
+  "description": "A modern Learning Management System built with Next.js, Prisma, and Supabase",
+  "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
-    "server:dev": "cd server && npm run dev",
-    "client:dev": "cd client && npm run dev",
-    "build": "npm run client:build && npm run server:build",
-    "client:build": "cd client && npm run build",
-    "server:build": "cd server && npm run build",
-    "start": "cd server && npm start",
-    "install:all": "npm install && cd client && npm install && cd ../server && npm install",
-    "lint": "npm run lint:client && npm run lint:server",
-    "lint:client": "cd client && npm run lint",
-    "lint:server": "cd server && npm run lint",
-    "format": "npm run format:client && npm run format:server",
-    "format:client": "cd client && npm run format",
-    "format:server": "cd server && npm run format",
-    "test": "npm run test:client && npm run test:server",
-    "test:client": "cd client && npm test",
-    "test:server": "cd server && npm test",
-    "clean": "rm -rf node_modules client/node_modules server/node_modules",
+    "dev": "cd web && npm run dev",
+    "build": "cd web && npm run build",
+    "start": "cd web && npm run start",
+    "lint": "cd web && npm run lint",
+    "format": "cd web && npm run format",
+    "db:generate": "cd web && npm run prisma:generate",
+    "db:migrate": "cd web && npm run prisma:migrate:dev",
+    "db:seed": "cd web && npm run prisma:seed",
+    "db:studio": "cd web && npm run prisma:studio",
+    "db:reset": "cd web && npm run prisma:reset",
+    "install:all": "npm install && cd web && npm install",
+    "clean": "rm -rf node_modules web/node_modules",
     "reset": "npm run clean && npm run install:all"
   },
-  "workspaces": [
-    "client",
-    "server",
-    "shared"
-  ],
   "keywords": [
     "lms",
-    "mern",
-    "mongodb",
-    "express",
-    "react",
-    "nodejs",
+    "nextjs",
+    "prisma",
+    "supabase",
     "education",
-    "university"
+    "university",
+    "typescript"
   ],
   "author": "Your Name",
   "license": "MIT",
@@ -50,10 +38,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/university-lms-mern.git"
+    "url": "git+https://github.com/yourusername/university-lms.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/university-lms-mern/issues"
+    "url": "https://github.com/yourusername/university-lms/issues"
   },
-  "homepage": "https://github.com/yourusername/university-lms-mern#readme"
+  "homepage": "https://github.com/yourusername/university-lms#readme"
 }
